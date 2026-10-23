@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI for Game Accessibility</title>
+<meta name="description" content="AI for game accessibility: auditing prototypes and mapping released games. A talk by Nadia Di Leo, University of Foggia, at the AI and Games Conference 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect x='3' y='1' width='4' height='14' fill='%23afa0ba'/%3E%3Crect x='8' y='3' width='4' height='12' fill='%23a0b2ba'/%3E%3Crect x='3' y='1' width='4' height='2' fill='%232e2a35'/%3E%3Crect x='8' y='3' width='4' height='2' fill='%232e2a35'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 10 8"><path d="M0 3H6V0H7V1H8V2H9V3H10V5H9V6H8V7H7V8H6V5H0Z"/></symbol>
+    <symbol id="i-shelf" viewBox="0 0 16 14"><path d="M0 13h16v1H0zM1 2h3v11H1zM5 4h3v9H5zM9 3h2v10H9zM12 6l2-1 2 7-2 1z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 16 18">
+      <path d="M1 0h10v1h1v1h1v1h1v1h1v14H1z" fill="#fbfafc"/>
+      <path d="M1 0h10v1H2v16h12V5h1v13H1zM11 1h1v1h1v1h1v1h1v1h-5zM12 3v1h1V3z" fill="#2e2a35"/>
+      <path d="M4 7h8v1H4zM4 9h8v1H4zM4 11h8v1H4zM4 13h5v1H4z" fill="#6f6280"/>
+    </symbol>
+    <symbol id="i-cross" viewBox="0 0 9 9"><path d="M0 0h2v1h1v1h1v1h1V2h1V1h1V0h2v2H8v1H7v1H6v1h1v1h1v1h1v2H7V8H6V7H5V6H4v1H3v1H2v1H0V7h1V6h1V5h1V4H2V3H1V2H0z"/></symbol>
+    <symbol id="i-tick" viewBox="0 0 9 9"><path d="M7 1h2v2H8v1H7v1H6v1H5v1H4v1H3V7H2V6H1V5H0V4h2v1h1v1h1V5h1V4h1V3h1z"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 12 10"><path d="M0 3h2V2h1V1h1V0h1v10H4V9H3V8H2V7H0zM7 3h1v4H7zM9 1h1v1h1v6h-1v1H9V8h1V2H9z"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage" aria-live="off">
+
+  <!-- ============================== TITLE ============================== -->
+  <section id="scr-title" class="screen is-active" aria-label="Title screen">
+    <div class="case3d-wrap">
+      <div id="title-case" class="case3d" aria-hidden="true">
+        <div class="c3-front">
+          <div class="cover">
+            <p class="cover-band"><span data-t="title.band1">University of Foggia</span><span data-t="title.band2">AI and Games Conference 2026</span></p>
+            <div class="cover-art">
+              <img src="assets/deco/cloud.png" alt="" class="px">
+            </div>
+            <h1 class="cover-title"><span class="tt" data-type data-t="title.line1">AI FOR GAME</span><span class="tt" data-type data-t="title.line2">ACCESSIBILITY</span></h1>
+            <p class="cover-sub" data-t="title.sub">Auditing prototypes and mapping released games</p>
+            <p class="cover-author">NADIA DI LEO</p>
+          </div>
+        </div>
+        <div class="c3-spine"><div class="spine-own"><span class="so-num">00</span><span class="so-title">AI FOR GAME ACCESSIBILITY</span><span class="so-author">DI LEO</span></div></div>
+        <div class="c3-back"></div>
+      </div>
+    </div>
+    <div class="title-cta">
+      <button class="btn btn-start" id="btn-start" type="button"><span class="blink">Press start</span></button>
+      <p class="hint">Enter to start, F for fullscreen</p>
+    </div>
+    <p class="sr-only">AI for game accessibility: auditing prototypes and mapping released games. Nadia Di Leo, University of Foggia. AI and Games Conference 2026.</p>
+  </section>
+
+  <!-- ============================== LIBRARY ============================== -->
+  <section id="scr-library" class="screen" aria-label="Talk library">
+    <header class="lib-head">
+      <h2 class="lib-title" data-t="library.title">AI for game accessibility</h2>
+      <p class="lib-sub" data-t="library.sub">Auditing prototypes and mapping released games</p>
+    </header>
+
+    <div class="lib-scroll">
+      <div class="lib-box">
+        <div class="lib-scene" id="lib-scene">
+          <div class="wall-window" aria-hidden="true">
+            <div class="ww-sky"><img src="assets/deco/cloud.png" alt="" class="px ww-cloud"></div>
+            <div class="ww-frame"></div>
+          </div>
+          <div id="shelf">
+            <div class="plank" aria-hidden="true"></div>
+          </div>
+          <p id="hover-label" class="hover-label" aria-hidden="true"></p>
+        </div>
+      </div>
+    </div>
+
+    <p class="lib-hint">Pick a case from the shelf, or press start to play in order.</p>
+    <div class="lib-actions">
+      <button class="btn" id="btn-continue" type="button"><span class="lbl">Start</span> <svg class="ic"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-quiet" type="button" data-act="settings">Settings</button>
+    </div>
+
+    <div id="popup" class="win win-pop" role="dialog" aria-modal="false" aria-labelledby="pop-title" hidden>
+      <div class="win-bar"><button class="win-close" type="button" aria-label="Close" data-act="pop-close"></button><span class="win-title" id="pop-num"></span><i class="win-zoom" aria-hidden="true"></i></div>
+      <div class="win-body">
+        <h3 id="pop-title"></h3>
+        <p class="pop-blurb" id="pop-blurb"></p>
+        <ol class="pop-pages" id="pop-pages"></ol>
+        <p class="pop-spine" id="pop-spine"></p>
+        <div class="pop-actions"><button class="btn" type="button" id="pop-open">Open <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== DECK ============================== -->
+  <section id="scr-deck" class="screen" aria-label="Talk">
+    <div id="pages">
+
+      <!-- ===== 01 PRESENT, DOCUMENTED, USABLE ===== -->
+      <article class="page" id="p-intro">
+        <header class="pg-head"><h2 class="pg-title" data-t="intro.title">PRESENT, DOCUMENTED, USABLE</h2></header>
+        <div class="two-col intro-cols">
+          <div class="txt">
+            <p class="in" data-t="intro.p1">In 2025, five games were nominated for Innovation in Accessibility at The Game Awards. I audited all five against 121 <a class="tlink" href="#w-gagfull" role="button" data-open="w-gagfull" data-step="1">Game Accessibility Guidelines</a>.</p>
+            <p class="in" data-t="intro.p2">Each game implemented between 74.5% and 83.2% of the guidelines that applied to it. Official materials mentioned only 25.5% to 48.6% of those features, so most of what the games offered was invisible to players deciding whether to buy them.</p>
+            <p class="in" data-t="intro.p3">A feature can also be there and still fail in play. During the audit, a bug made South of Midnight forget custom key bindings at every launch.</p>
+            <p class="note frame in" data-t="intro.note">I keep these as three separate measures: is the feature there, is it documented, and does it work for the player?</p>
+          </div>
+          <section class="win jit in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="intro.win">Five nominees, three measures</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <div class="ranges" id="ranges" role="img" aria-label="Range chart. Implemented, as a percentage of applicable guidelines: from 74.5 (EA Sports FC 26) to 83.2 (South of Midnight). Documented, as a percentage of implemented features: from 25.5 (South of Midnight) to 48.6 (EA Sports FC 26). Works in play: not measured by the audit, it needs testing with players.">
+                <div class="rg-row" data-k="impl"><p class="rg-l"><b data-t="intro.r1">Implemented</b><span data-t="intro.r1d">% of applicable guidelines</span></p><div class="rg-track"></div></div>
+                <div class="rg-row" data-k="doc"><p class="rg-l"><b data-t="intro.r2">Documented</b><span data-t="intro.r2d">% of implemented features</span></p><div class="rg-track"></div></div>
+                <div class="rg-row" data-k="play"><p class="rg-l"><b data-t="intro.r3">Works in play</b><span data-t="intro.r3d">for the players who need it</span></p><div class="rg-track rg-none"><span data-t="intro.r3n">not measured by the audit: it needs testing with players</span></div></div>
+                <div class="rg-axis" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
+              </div>
+              <div class="rg-games" id="rg-games" aria-label="Highlight one game"></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="win win-float win-browser jit" id="w-gagfull" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title">Game accessibility guidelines</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <p class="win-addr">gameaccessibilityguidelines.com/full-list</p>
+          <div class="win-scroll" tabindex="0" aria-label="Full list of the Game Accessibility Guidelines">
+            <img src="assets/img/gag-full-1.png" alt="The Game Accessibility Guidelines website, full list page. Levels explained: basic, intermediate, advanced. Motor guidelines follow." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-2.png" alt="Full list continued: motor and cognitive guidelines." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-3.png" alt="Full list continued: cognitive and vision guidelines." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-4.png" alt="Full list continued: vision and hearing guidelines." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-5.png" alt="Full list continued: speech and general guidelines." width="960" height="1722" loading="lazy">
+          </div>
+        </section>
+      </article>
+
+      <!-- ===== PART 1 ===== -->
+      <article class="page page-divider" id="p-part1">
+        <div class="div-text">
+          <h2 class="div-title in" data-t="part1.title">AUDITING<br>GAMES</h2>
+          <p class="div-q in"><span>PART 1</span><svg class="ic div-arrow"><use href="#i-arrow"/></svg><span><span class="q-text" data-t="part1.q">CAN A MODEL HELP CHECK A GAME AGAINST THE GUIDELINES?</span></span></p>
+        </div>
+        <section class="win div-panel sheet-panel in" style="--acc:var(--lilac)" aria-label="An audit sheet, a demonstration">
+          <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="part1.win">Audit sheet</span><i class="win-zoom"></i></div>
+          <div class="win-body sheet-body">
+            <table class="sheet" id="sheet">
+              <thead><tr><th scope="col" data-t="part1.colG">Guideline</th><th scope="col" data-t="part1.colP">There</th><th scope="col" data-t="part1.colD">Documented</th><th scope="col" data-t="part1.colW">Works</th></tr></thead>
+              <tbody>
+                <tr data-v="y y y"><th scope="row" data-t="part1.r1">Subtitles for all speech</th><td><button class="cell" type="button" aria-label="There"></button></td><td><button class="cell" type="button" aria-label="Documented"></button></td><td><button class="cell" type="button" aria-label="Works"></button></td></tr>
+                <tr data-v="y y n"><th scope="row" data-t="part1.r2">Controls can be remapped</th><td><button class="cell" type="button" aria-label="There"></button></td><td><button class="cell" type="button" aria-label="Documented"></button></td><td><button class="cell" type="button" aria-label="Works"></button></td></tr>
+                <tr data-v="y n y"><th scope="row" data-t="part1.r3">Readable default font size</th><td><button class="cell" type="button" aria-label="There"></button></td><td><button class="cell" type="button" aria-label="Documented"></button></td><td><button class="cell" type="button" aria-label="Works"></button></td></tr>
+                <tr data-v="y n q"><th scope="row" data-t="part1.r4">No information by sound alone</th><td><button class="cell" type="button" aria-label="There"></button></td><td><button class="cell" type="button" aria-label="Documented"></button></td><td><button class="cell" type="button" aria-label="Works"></button></td></tr>
+                <tr data-v="n n q"><th scope="row" data-t="part1.r5">Settings are remembered</th><td><button class="cell" type="button" aria-label="There"></button></td><td><button class="cell" type="button" aria-label="Documented"></button></td><td><button class="cell" type="button" aria-label="Works"></button></td></tr>
+              </tbody>
+            </table>
+            <p class="sheet-key"><span><svg class="ic-mark"><use href="#i-tick"/></svg> <span data-t="part1.k1">yes</span></span><span><svg class="ic-mark"><use href="#i-cross"/></svg> <span data-t="part1.k2">no</span></span><span><b class="q-mark">?</b> <span data-t="part1.k3">needs a player test</span></span></p>
+          </div>
+        </section>
+      </article>
+
+      <!-- ===== 02 THE 2025 NOMINEES (1) ===== -->
+      <article class="page" id="p-awards-1">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="awards1.title">AUDITING THE 2025 NOMINEES</h2>
+          <p class="pg-sub" data-t="awards1.sub">121 guidelines, two evaluators, the first hour of play</p>
+        </header>
+        <div class="two-col aw1-cols">
+          <div class="txt">
+            <p class="in" data-t="awards1.p1">The nominees were Assassin’s Creed Shadows, Atomfall, DOOM: The Dark Ages, EA Sports FC 26 and South of Midnight: stealth, survival, a fast shooter, football and a narrative adventure.</p>
+            <p class="in" data-t="awards1.p2">First, we mapped every feature listed in each studio’s accessibility materials to a guideline. Then two evaluators played the first 60 minutes of each game on PC, the first-time user experience (Barnett et al., 2018), and scored every guideline as pass (1), partial (0.5), fail (0) or not applicable. They agreed closely (Cohen’s κ = 0.92).</p>
+            <p class="note frame in" data-t="awards1.note">DOOM: The Dark Ages won the award and ranked third in the audit. South of Midnight ranked first.</p>
+          </div>
+          <section class="win jit in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="awards1.win">Implemented and documented</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <p class="chart-cap" data-t="awards1.cap">Accessibility features implemented and documented (%)</p>
+              <div class="bars" id="bars" role="img" aria-label="Bar chart. Implemented, as a percentage of applicable guidelines, and documented, as a percentage of implemented features: Assassin’s Creed Shadows 77.0 and 26.5; Atomfall 83.0 and 31.0; DOOM: The Dark Ages 79.7 and 40.6; EA Sports FC 26 74.5 and 48.6; South of Midnight 83.2 and 25.5."></div>
+              <p class="legend"><span><i class="sw sw-impl"></i><span data-t="awards1.lg1">Implemented (% of applicable guidelines)</span></span><span><i class="sw sw-doc"></i><span data-t="awards1.lg2">Documented (% of implemented features)</span></span></p>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="awards1.cite">Di Leo, N. (2026a). <i>A matter of accessibility: A guidelines-based accessibility evaluation of award-nominated video games</i> (manuscript under review).</p>
+      </article>
+
+      <!-- ===== 02 THE 2025 NOMINEES (2) ===== -->
+      <article class="page" id="p-awards-2">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="awards2.title">GAME BY GAME</h2>
+          <p class="pg-sub" data-t="awards2.sub">Share of applicable guidelines implemented, by category and level</p>
+        </header>
+        <div class="two-col aw2-cols">
+          <div class="game-list in" role="tablist" aria-label="Choose a game" id="game-list"></div>
+          <section class="win in" style="--acc:var(--blue)" id="game-view">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" id="gv-title"></span><i class="win-zoom"></i></div>
+            <div class="win-body gv-body">
+              <div class="heat" id="gv-heat" role="img"></div>
+              <div class="heat-key" aria-hidden="true"></div>
+              <p class="gv-note" id="gv-note" aria-live="polite"></p>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- ===== 02 THE 2025 NOMINEES (3) ===== -->
+      <article class="page" id="p-awards-3">
+        <header class="pg-head"><h2 class="pg-title" data-t="awards3.title">WHAT THE FIVE GAMES SHARE</h2></header>
+        <div class="two-col aw3-cols">
+          <div class="txt">
+            <p class="in" data-t="awards3.p1">Every game scores lower on advanced guidelines than on basic ones. The drop is steepest for blind players: screen readers, voiced navigation and audio description are rare across the sample.</p>
+            <p class="in" data-t="awards3.p2">Building access and documenting it look like separate efforts. FC 26 implements the least and documents the most; South of Midnight does the opposite.</p>
+            <p class="in" data-t="awards3.p3">Some of the most innovative features still lack a relevant guideline, such as DOOM’s <a class="tlink" href="#w-doom" role="button" data-open="w-doom" data-step="2">redesigned combat</a> or South of Midnight’s <a class="tlink" href="#w-strand" role="button" data-open="w-strand" data-step="3">Guiding Strand</a>. A checklist has no row for them, and an automated checker built on that checklist would miss them too.</p>
+          </div>
+          <section class="win jit in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="awards3.win">Implemented against documented</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <div class="scatter" id="scatter" role="img" aria-label="Scatter plot of the five games, implemented against documented: Assassin’s Creed Shadows 77.0 and 26.5; Atomfall 83.0 and 31.0; DOOM: The Dark Ages 79.7 and 40.6; EA Sports FC 26 74.5 and 48.6; South of Midnight 83.2 and 25.5. The game that implements the least documents the most.">
+                <span class="sc-ann" data-g="fc" data-t="awards3.a1">implements least, documents most</span>
+                <span class="sc-ann" data-g="som" data-t="awards3.a2">implements most, documents least</span>
+                <span class="sc-ax sc-ax-x" data-t="awards3.ax">Implemented (% of applicable guidelines)</span>
+                <span class="sc-ax sc-ax-y" data-t="awards3.ay">Documented (% of implemented)</span>
+              </div>
+              <button class="btn btn-sm sc-go" type="button" data-step="1" data-fn="scatter" data-t="awards3.btn">Compare the extremes</button>
+            </div>
+          </section>
+        </div>
+
+        <section class="win win-float win-shot jit" id="w-doom" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="awards3.fig1">DOOM: The Dark Ages, difficulty settings</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/doom-combat.jpg" alt="DOOM: The Dark Ages settings, Difficulty tab. Under Modifiers, sliders set damage to player, damage to demons, enemy projectile speed, enemy aggression, parry window, daze duration, game speed and resource values." width="800" height="488" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-shot jit" id="w-strand" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="awards3.fig2">South of Midnight, accessibility settings</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/som-guiding-strand.jpg" alt="South of Midnight accessibility settings. Under Navigation Assistance, Guiding Strand is on. Its description: enable or disable the in-game line that points towards the next main story objective." width="800" height="455" loading="lazy"></div>
+        </section>
+      </article>
+
+      <!-- ===== 03 POINTCHECK ===== -->
+      <article class="page" id="p-pointcheck">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="pc.title">POINTCHECK</h2>
+          <p class="pg-sub" data-t="pc.sub">A web accessibility tester that looks at the rendered page</p>
+        </header>
+        <div class="two-col pc-cols">
+          <div class="txt txt-sm">
+            <p class="in" data-t="pc.p1">PointCheck is an open-source tool by Brendan Works, featured by Ai2 in May 2026. It tests web pages against WCAG 2.1 and 2.2 at level AA.</p>
+            <p class="in" data-t="pc.p2">Existing rule-based tools (such as AChecker) focus only on a page’s code. PointCheck, instead, also looks at what appears on screen. It runs through each page and takes screenshots, finds the pixel coordinates of target elements, decides whether there is any issue, and writes a report.</p>
+            <p class="in" data-t="pc.p3">Every result keeps its screenshot and a confidence level. Checks that need human judgement, such as captions on live video, are left out, and the tool is designed to be self-hosted.</p>
+          </div>
+          <section class="win win-browser in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="pc.win">Focus visibility check, illustrated</span><i class="win-zoom"></i></div>
+            <p class="win-addr">example.org/sign-up</p>
+            <div class="pc-demo" id="pc-demo">
+              <div class="pc-left">
+              <div class="pc-page" aria-hidden="true">
+                <p class="pc-h">Create an account</p>
+                <p class="pc-l">Email</p><div class="pc-in" data-focus="1"></div>
+                <p class="pc-l">Password</p><div class="pc-in"></div>
+                <div class="pc-btn" data-focus="2">Sign up</div>
+                <div class="pc-point" id="pc-point"><i></i><span id="pc-xy"></span></div>
+              </div>
+              <button class="btn btn-sm pc-go" type="button" data-fn-next="pc" data-t="pc.btn">Next check</button>
+              </div>
+              <ol class="pc-log" id="pc-log" aria-live="polite">
+                <li data-s="1"><b data-t="pc.l1k">Screenshot</b> <span data-t="pc.l1">Tab: focus moves to the Email field. Screenshot taken.</span></li>
+                <li data-s="1"><b data-t="pc.l2k">Locate</b> <span data-t="pc.l2">Finds the focused element and returns its pixel coordinates.</span></li>
+                <li data-s="1"><b data-t="pc.l3k">Check</b> <span data-t="pc.l3">“Is there a visible focus indicator?” Yes, a dotted outline. Pass, high confidence.</span></li>
+                <li data-s="2"><b data-t="pc.l4k">Screenshot</b> <span data-t="pc.l4">Tab, tab: focus moves to the Sign up button.</span></li>
+                <li data-s="2" class="pc-fail"><b data-t="pc.l5k">Check</b> <span data-t="pc.l5">No visible indicator. Fail, WCAG 2.4.7, high confidence.</span></li>
+                <li data-s="3"><b data-t="pc.l6k">Report</b> <span data-t="pc.l6">“The Sign up button shows no focus indicator. Add a visible focus style.”</span></li>
+              </ol>
+              <i data-step="1" data-fn="pc" hidden></i><i data-step="2" data-fn="pc" hidden></i><i data-step="3" data-fn="pc" hidden></i>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="pc.cite">Works, B. (2026). <i>PointCheck</i> [Computer software]. GitHub. Ai2. (2026, May 21). <i>Building accessibility tools on a truly open foundation</i>.</p>
+      </article>
+
+      <!-- ===== 04 FROM WEB PAGES TO PLAYABLE BUILDS ===== -->
+      <article class="page" id="p-builds">
+        <header class="pg-head"><h2 class="pg-title pg-title-md" data-t="builds.title">FROM WEB PAGES TO PLAYABLE BUILDS</h2></header>
+        <div class="two-col bd-cols">
+          <div class="txt txt-sm">
+            <p class="in" data-t="builds.p1">Our audit cost each evaluator an hour of play and 121 judgements per game. More than 19,000 games were released on Steam in 2025.</p>
+            <p class="in" data-t="builds.p2">Games are harder to test than web pages: menus are drawn by the engine, the game state changes every frame, and many barriers appear only in play. Multimodal models still struggle to spot glitches in game scenes (Taesiri et al., 2024).</p>
+            <p class="in" data-t="builds.p3">A game version of PointCheck would drive a playable build the way our evaluators did: open the settings, change them, restart, play the first hour. It would attach frames and sounds to individual guidelines, as well as identify new, unseen guidelines.</p>
+            <p class="note frame in" data-t="builds.note">The output would be observations with evidence and a list of tests for an accessibility specialist. People still decide whether the game is accessible.</p>
+          </div>
+          <section class="win in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="builds.win">Prototype build: observations (mock-up)</span><i class="win-zoom"></i></div>
+            <div class="win-body bd-body">
+              <div class="game-screen" aria-hidden="true">
+                <img src="assets/deco/cloud.png" alt="" class="px gs-cloud">
+                <div class="gs-ground"></div>
+                <div class="gs-menu">
+                  <p class="gs-mh">SETTINGS</p>
+                  <p class="gs-row"><span>Subtitles</span><span>On</span></p>
+                  <p class="gs-row"><span>Subtitle size</span><span>Medium</span></p>
+                  <p class="gs-row"><span>Background</span><span>60%</span></p>
+                  <p class="gs-row gs-remap"><span>Controls</span><span>Remap</span><span class="gs-pin" data-pin="2">2</span></p>
+                </div>
+                <p class="gs-sub"><span class="gs-pin" data-pin="1">1</span><b>MIRA</b> The bridge is out. Take the tunnel.</p>
+              </div>
+              <p class="gs-audio"><svg class="ic-snd" aria-hidden="true"><use href="#i-sound"/></svg> <span data-t="builds.audio">audio track: footsteps behind the player</span><span class="gs-pin" data-pin="3" aria-hidden="true">3</span></p>
+              <div class="obs-list" id="obs-list">
+                <div class="obs" data-step="1" data-fn="obs">
+                  <p class="obs-h"><span class="obs-n">1</span><span data-t="builds.o1">Subtitles on before any sound plays</span><em class="chip chip-ok" data-t="builds.o1s">Observed</em></p>
+                  <p class="obs-g" data-t="builds.o1g">“Ensure subtitles/captions are or can be turned on before any sound is played”, Hearing, Intermediate</p>
+                </div>
+                <div class="obs" data-step="2" data-fn="obs">
+                  <p class="obs-h"><span class="obs-n">2</span><span data-t="builds.o2">Remapping menu found</span><em class="chip chip-test" data-t="builds.o2s">Test: restart</em></p>
+                  <p class="obs-g" data-t="builds.o2g">“Allow controls to be remapped / reconfigured”, Motor, Basic. Proposed test: restart and check that the bindings persist.</p>
+                </div>
+                <div class="obs" data-step="3" data-fn="obs">
+                  <p class="obs-h"><span class="obs-n">3</span><span data-t="builds.o3">No on-screen cue for the footsteps</span><em class="chip chip-no" data-t="builds.o3s">Not found</em></p>
+                  <p class="obs-g" data-t="builds.o3g">“Provide captions or visuals for significant background sounds”, Hearing, Intermediate. Proposed test with Deaf and hard of hearing players.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="builds.cite">Squires-Hand, L. (2025, December 12). Over 19,000 games have released on Steam in 2025. <i>GamingOnLinux</i> (data: SteamDB). Taesiri, M. R., Feng, T., Bezemer, C.-P., &amp; Nguyen, A. (2024). GlitchBench. <i>CVPR 2024</i>.</p>
+      </article>
+
+      <!-- ===== 05 A MODEL FOR GAMES ===== -->
+      <article class="page" id="p-model">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="model.title">A MODEL FOR GAMES</h2>
+          <p class="pg-sub" data-t="model.sub">An HPC grant application in preparation</p>
+        </header>
+        <div class="two-col md-cols">
+          <div class="txt">
+            <p class="in" data-t="model.p1">Web pages now have tools like PointCheck. I have not found an open equivalent that checks a running game against the Game Accessibility Guidelines.</p>
+            <p class="in" data-t="model.p2">I am preparing an HPC grant application to train one. Shown a frame from a menu or from play, the model would point at the element a guideline is about and answer a question specific to that guideline, as PointCheck does for focus indicators.</p>
+            <p class="in" data-t="model.p3">The audits are a starting point: every game–guideline judgement comes with notes, and the annotated data will be openly released.</p>
+            <p class="note frame in" data-t="model.note">Unreleased builds are confidential, so the model has to run on a studio’s own machines.</p>
+          </div>
+          <section class="win quest in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="model.win">Quest log</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <p class="qst-h" data-t="model.quest">QUEST: AN ACCESSIBILITY AUDITOR FOR GAMES</p>
+              <ul class="qst" id="quest">
+                <li class="done"><i class="qbox"></i><span data-t="model.q1">Audit five games against 121 guidelines</span></li>
+                <li class="now"><i class="qbox"></i><span data-t="model.q2">Secure HPC compute</span><em data-t="model.q2s">grant in preparation</em></li>
+                <li><i class="qbox"></i><span data-t="model.q3">Fine-tune an open vision-language model on annotated captures</span></li>
+                <li><i class="qbox"></i><span data-t="model.q4">Compare its judgements with human audits</span></li>
+                <li><i class="qbox"></i><span data-t="model.q5">Test the flagged cases with disabled players</span></li>
+                <li><i class="qbox"></i><span data-t="model.q6">Release open weights that studios can run locally</span></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- ===== PART 2 ===== -->
+      <article class="page page-divider" id="p-part2">
+        <div class="div-text">
+          <h2 class="div-title in" data-t="part2.title">MAPPING<br>GAMES</h2>
+          <p class="div-q in"><span>PART 2</span><svg class="ic div-arrow"><use href="#i-arrow"/></svg><span><span class="q-text" data-t="part2.q">CAN A MODEL MAP WHAT PLAYERS AND STUDIOS ALREADY PUBLISH?</span></span></p>
+        </div>
+        <section class="win div-panel map-panel in" style="--acc:var(--blue)" aria-hidden="true">
+          <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="part2.win">Guidelines × reviews</span><i class="win-zoom"></i></div>
+          <div class="win-body">
+            <div class="matrix" id="matrix"></div>
+            <p class="sheet-key"><span><i class="mk mk-y"></i> <span data-t="part2.k1">works</span></span><span><i class="mk mk-n"></i> <span data-t="part2.k2">missing or broken</span></span><span><i class="mk"></i> <span data-t="part2.k3">not mentioned</span></span></p>
+          </div>
+        </section>
+      </article>
+
+      <!-- ===== 06 MORE MATERIAL TO MAP ===== -->
+      <article class="page" id="p-attention">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="att.title">MORE MATERIAL TO MAP</h2>
+          <p class="pg-sub" data-t="att.sub">Public attention to game accessibility, 2018–2026</p>
+        </header>
+        <div class="two-col at-cols">
+          <div class="txt">
+            <p class="in" data-t="att.p1">In the Can I Play That? corpus, accessibility discussion has grown sharply since 2019.</p>
+            <p class="in" data-t="att.p2">Awards are another, imperfect sign. A prize guarantees nothing about access, yet each one adds public material to examine, from nomination pages to studio statements, and keeps accessibility in industry discussion.</p>
+            <p class="note frame in" data-t="att.note">The three rankings disagree: The Game Awards picked DOOM: The Dark Ages, the Canadian Game Awards picked Assassin’s Creed Shadows, and my audit put South of Midnight first.</p>
+          </div>
+          <section class="win in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="att.win">Timeline</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <ol class="tl" id="timeline" data-advance>
+                <li data-step="1" data-fn="tl"><b>2018</b><span data-t="att.e1">Can I Play That? is founded.</span></li>
+                <li data-step="2" data-fn="tl"><b>2019</b><span data-t="att.e2">The first reviews in my corpus.</span></li>
+                <li data-step="3" data-fn="tl"><b>2020</b><span data-t="att.e3">The Game Awards add Innovation in Accessibility. First winner: The Last of Us Part II.</span></li>
+                <li data-step="4" data-fn="tl"><b>2023</b><span data-t="att.e4">The first GAconf Awards (2022 edition), with 18 categories.</span></li>
+                <li data-step="5" data-fn="tl"><b>2025</b><span data-t="att.e5">GAconf Awards 2025, the fourth edition: 20 categories. Meanwhile, DOOM: The Dark Ages wins at The Game Awards.</span></li>
+                <li data-step="6" data-fn="tl"><b>2026</b><span data-t="att.e6">The Canadian Game Awards add Best in Accessibility. First winner: Assassin’s Creed Shadows.</span></li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- ===== 07 WHAT 448 REVIEWS TALK ABOUT ===== -->
+      <article class="page" id="p-cipt">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="cipt.title">WHAT 448 REVIEWS TALK ABOUT</h2>
+          <p class="pg-sub" data-t="cipt.sub">Can I Play That? accessibility reviews, 2019–2024</p>
+        </header>
+        <div class="two-col cp-cols">
+          <div class="txt">
+            <p class="in" data-t="cipt.p1">Can I Play That? publishes accessibility reviews written largely by disabled players. I analysed 448 of them, published between 2019 and 2024 (Di Leo, 2025).</p>
+            <p class="in" data-t="cipt.p2">A language model extracted keywords from each review and labelled each one positive, negative or mixed. Text embeddings and clustering then grouped the keywords into six themes. Difficulty settings had the most keywords; visual accessibility had the widest gap between positive and negative ones.</p>
+            <p class="note frame in" data-t="cipt.note">Each reviewer writes from their own needs. Someone who relies on subtitles may test every caption option and say nothing about motor access, so the corpus shows what mattered to the people who wrote it, which is not a complete inventory.</p>
+          </div>
+          <section class="win in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="cipt.win">One square per review</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <div class="waffle" id="waffle" role="img" aria-label="448 squares, one for each review."></div>
+              <div class="waffle-n"><p><b id="waffle-n">448</b> <span data-t="cipt.count">reviews</span></p><button class="btn btn-sm" type="button" data-open="w-cl-0" data-step="1" data-t="cipt.btn">Cluster map</button></div>
+              <ul class="themes" aria-label="Six themes, each with its chart">
+                <li><button type="button" data-open="w-cl-1" data-step="2" data-t="cipt.t1">Controls</button></li>
+                <li><button type="button" data-open="w-cl-2" data-step="3" data-t="cipt.t2">UI and navigation</button></li>
+                <li><button type="button" data-open="w-cl-3" data-step="4" data-t="cipt.t3">Audio, speech and sound</button></li>
+                <li><button type="button" data-open="w-cl-4" data-step="5" data-t="cipt.t4">Difficulty settings</button></li>
+                <li><button type="button" data-open="w-cl-5" data-step="6" data-t="cipt.t5">Visual accessibility</button></li>
+                <li><button type="button" data-open="w-cl-6" data-step="7" data-t="cipt.t6">Subtitles</button></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="cipt.cite">Di Leo, N. (2025). Theoretical framework for video game accessibility: Bridging user experiences and industry data for inclusive design. In <i>AAATE 2025</i> (pp. 304–314). Springer.</p>
+
+        <section class="win win-float win-fig jit" id="w-cl-0" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig0">Keyword clusters, t-SNE map</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-clusters.jpg" alt="Scatter plot of the review keywords, reduced to two dimensions with t-SNE and coloured by cluster: subtitles, difficulty settings, UI and navigation, audio, speech and sound, visual accessibility, and controls. Each cluster occupies its own region, with some overlap." width="1400" height="826" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-fig jit" id="w-cl-1" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig1">Controls: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-controls.jpg" alt="Line chart, cumulative count of controls keywords from 2018 to 2024. Positive and negative keywords rise almost together and end at about 350 positive and 305 negative; mixed keywords reach about 70." width="1400" height="687" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-fig jit" id="w-cl-2" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig2">UI and navigation: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-ui.jpg" alt="Line chart, cumulative count of UI and navigation keywords from 2018 to 2024. Positive keywords stay ahead and end at about 210, negative at about 165; mixed keywords reach about 30." width="1400" height="683" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-fig jit" id="w-cl-3" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig3">Audio, speech and sound: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-audio.jpg" alt="Line chart, cumulative count of audio, speech and sound keywords from 2018 to 2024. Positive keywords stay slightly ahead and end at about 220, negative at about 195; mixed keywords reach about 50." width="1400" height="685" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-fig jit" id="w-cl-4" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig4">Difficulty settings: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-difficulty.jpg" alt="Line chart, cumulative count of difficulty settings keywords from 2018 to 2024, the largest of the six themes. Positive keywords end at about 470, negative at about 355; mixed keywords reach about 105." width="1400" height="684" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-fig jit" id="w-cl-5" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig5">Visual accessibility: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-visual.jpg" alt="Line chart, cumulative count of visual accessibility keywords from 2018 to 2024. Positive keywords pull ahead from 2019 and end at about 385, negative at about 215, the widest gap of the six themes; mixed keywords reach about 60." width="1400" height="684" loading="lazy"></div>
+        </section>
+        <section class="win win-float win-fig jit" id="w-cl-6" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig6">Subtitles: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/aaate-subtitles.jpg" alt="Line chart, cumulative count of subtitles keywords from 2018 to 2024. Negative keywords stay ahead until early 2023, when positive ones overtake them; they end at about 300 positive and 275 negative; mixed keywords reach about 65." width="1400" height="686" loading="lazy"></div>
+        </section>
+      </article>
+
+      <!-- ===== 08 FROM CHECKLISTS TO PLAYABILITY (1) ===== -->
+      <article class="page" id="p-check-1">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="check1.title">FROM CHECKLISTS TO PLAYABILITY</h2>
+          <p class="pg-sub" data-t="check1.sub">Mapping reviews onto the guidelines by hand</p>
+        </header>
+        <div class="two-col ck-cols">
+          <div class="txt">
+            <p class="in" data-t="check1.p1">I extended the corpus to 479 reviews (2019–2025) and mapped them onto the Game Accessibility Guidelines (Di Leo &amp; Tarantino, 2026).</p>
+            <p class="in" data-t="check1.p2">For each game and each guideline, I read the review and chose yes (the feature is there and works) or no (it is missing or does not work), or left the cell empty when the review says nothing. With 120 guidelines, that is a matrix of more than 57,000 cells.</p>
+            <p class="in" data-t="check1.p3">The score multiplies the positive rate by a weight that grows with the number of tags, so a single enthusiastic mention cannot top the ranking.</p>
+            <div class="desk desk-row in">
+              <button class="file" type="button" data-open="w-digra" data-step="4"><svg class="fi"><use href="#i-doc"/></svg><span data-t="check1.file">paper</span></button>
+            </div>
+          </div>
+          <section class="win jit in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="check1.win">Weighted score</span><i class="win-zoom"></i></div>
+            <div class="win-body score-body" id="score">
+              <div class="sc-presets" role="group" aria-label="Examples from the paper">
+                <button class="btn btn-sm sc-pre" type="button" data-step="1" data-fn="preset" data-yes="34" data-no="3" data-t="check1.pre1">South of Midnight</button>
+                <button class="btn btn-sm sc-pre" type="button" data-step="2" data-fn="preset" data-yes="259" data-no="53" data-t="check1.pre2">Subtitles for all important speech</button>
+                <button class="btn btn-sm sc-pre" type="button" data-step="3" data-fn="preset" data-yes="1" data-no="0" data-t="check1.pre3">Use symbol-based chat</button>
+              </div>
+              <label class="sc-row"><span class="sc-l" data-t="check1.s1">yes tags</span><input type="range" min="0" max="320" value="34" id="sc-yes"><output id="sc-yes-v">34</output></label>
+              <label class="sc-row"><span class="sc-l" data-t="check1.s2">no tags</span><input type="range" min="0" max="80" value="3" id="sc-no"><output id="sc-no-v">3</output></label>
+              <table class="formula">
+                <tr><th data-t="check1.f1">tags (T)</th><td>yes + no</td><td id="f-t">37</td></tr>
+                <tr><th data-t="check1.f2">positive rate</th><td>yes / T</td><td id="f-rate">0.92</td></tr>
+                <tr><th data-t="check1.f3">weight</th><td>T / (T + 10)</td><td id="f-w">0.79</td></tr>
+                <tr class="f-score"><th data-t="check1.f4">score</th><td>rate × weight</td><td id="f-score">0.72</td></tr>
+              </table>
+              <div class="sc-bar" aria-hidden="true"><i id="sc-fill"></i></div>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="check1.cite">Di Leo, N., &amp; Tarantino, A. (2026). From checklists to playability: A systematic mapping of player reviews to the Game Accessibility Guidelines. In <i>Proceedings of DiGRA 2026</i>. Digital Games Research Association.</p>
+        <section class="win win-float jit" id="w-digra" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title">DiGRA 2026</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <div class="win-img"><img src="assets/img/paper-digra.png" alt="First page of the paper From Checklists to Playability: A systematic mapping of player reviews to the Game Accessibility Guidelines, by Nadia Di Leo and Antonino Tarantino, University of Foggia." width="728" height="836"></div>
+        </section>
+      </article>
+
+      <!-- ===== 08 FROM CHECKLISTS TO PLAYABILITY (2) ===== -->
+      <article class="page" id="p-check-2">
+        <header class="pg-head"><h2 class="pg-title" data-t="check2.title">WHAT THE REVIEWS MENTION</h2></header>
+        <p class="lead lead-wide in" data-t="check2.lead">100 of the 120 guidelines appear at least once; 20 never do. When a feature is mentioned, it is described as working 66.5% of the time. Hearing guidelines are mentioned in 19.2% of the cases where they could be, Speech guidelines in 1.3%, and advanced guidelines hardly ever.</p>
+        <div class="two-col cv-cols">
+          <section class="win in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="check2.win1">By category and level</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <div class="seg-tabs" role="tablist" aria-label="Measure">
+                <button class="seg-tab on" type="button" role="tab" aria-selected="true" data-m="mentioned" data-t="check2.tab1">Mentioned</button>
+                <button class="seg-tab" type="button" role="tab" aria-selected="false" data-m="working" data-step="1" data-fn="cov" data-t="check2.tab2">Working when mentioned</button>
+              </div>
+              <div class="heat heat-cov" id="cov-heat" role="img"></div>
+              <div class="heat-key" aria-hidden="true"></div>
+            </div>
+          </section>
+          <section class="win in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="check2.win2">Most mentioned guidelines</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <p class="chart-cap" data-t="check2.cap">Games whose reviews mention the guideline (of 472 with at least one tag)</p>
+              <ul class="hbars" id="hbars">
+                <li data-v="312"><span data-t="check2.b1">Provide subtitles for all important speech</span><i></i><b>312</b></li>
+                <li data-v="268"><span data-t="check2.b2">Allow controls to be remapped / reconfigured</span><i></i><b>268</b></li>
+                <li data-v="253"><span data-t="check2.b3">If any subtitles / captions are used, present them in a clear, easy to read way</span><i></i><b>253</b></li>
+                <li data-v="233"><span data-t="check2.b4">Ensure no essential information is conveyed by sounds alone</span><i></i><b>233</b></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- ===== 09 SCALING THE MAPPING ===== -->
+      <article class="page" id="p-llm">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="llm.title">SCALING THE MAPPING</h2>
+          <p class="pg-sub" data-t="llm.sub">A language model for the first pass, people for the rest</p>
+        </header>
+        <div class="two-col lm-cols">
+          <div class="txt txt-sm">
+            <p class="in" data-t="llm.p1">Hand coding was feasible for this specific project, but it cannot keep up with every new review, studio accessibility page and patch note.</p>
+            <p class="in" data-t="llm.p2">A language model can do the first pass. For each passage it proposes a guideline, a label and a confidence, and quotes the words that support them. People check every uncertain label and a random sample of the rest.</p>
+            <p class="in" data-t="llm.p3">Language models already beat crowd workers on some annotation tasks (Gilardi et al., 2023), but their accuracy varies from task to task, so they must be validated against human coding first (Pangakis et al., 2023). In my study of 27,036 Minecraft Education reviews, an LLM reached κ = 0.71 against human coders, who agreed with each other at 0.74 (Di Leo, 2026b).</p>
+            <p class="note frame in" data-t="llm.note">The 479 hand-coded reviews can serve as the test set.</p>
+          </div>
+          <section class="win in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="llm.win">Simulated first pass</span><i class="win-zoom"></i></div>
+            <div class="win-body lm-body">
+              <p class="lm-src" data-t="llm.src">Review passage, written for this slide from the South of Midnight audit notes</p>
+              <p class="lm-text" id="lm-text" data-t="llm.passage"><span class="hl" data-h="1" data-t="llm.h1">Combat, boss fights and chase sequences can all be skipped</span> from the settings. <span class="hl" data-h="2" data-t="llm.h2">The screen reader covers menus</span> and collectible text. <span class="hl" data-h="3" data-t="llm.h3">A glowing strand shows the way to the next objective, and an audio beacon gets louder</span> as you get closer. Annoyingly, <span class="hl" data-h="4" data-t="llm.h4">my custom key bindings were gone every time I restarted</span>.</p>
+              <ol class="lm-tags" id="lm-tags">
+                <li data-h="1"><span class="lm-g" data-t="llm.g1">Offer a means to bypass gameplay elements… General, Intermediate</span><span class="lm-v lm-yes">yes</span><span class="lm-c"><i style="--c:.94"></i>0.94</span></li>
+                <li data-h="2"><span class="lm-g" data-t="llm.g2">Ensure screen reader support, including menus… Vision, Advanced</span><span class="lm-v lm-yes">yes</span><span class="lm-c"><i style="--c:.88"></i>0.88</span></li>
+                <li data-h="3" class="lm-unsure"><span class="lm-g" data-t="llm.g3">Provide a voiced GPS? Vision, Advanced</span><span class="lm-v">unsure</span><span class="lm-c"><i style="--c:.41"></i>0.41</span></li>
+                <li data-h="4"><span class="lm-g" data-t="llm.g4">Ensure that all settings are saved/remembered. General, Basic</span><span class="lm-v lm-no">no</span><span class="lm-c"><i style="--c:.90"></i>0.90</span></li>
+              </ol>
+              <p class="lm-review" id="lm-review"><b data-t="llm.rk">Human review</b> <span data-t="llm.r">The Strand matches no single guideline. Record it as a design-level provision.</span></p>
+              <div class="lm-actions">
+                <button class="btn btn-sm" type="button" data-step="1" data-fn="llm" data-t="llm.btn1">Run first pass</button>
+                <button class="btn btn-sm btn-quiet" type="button" data-step="2" data-fn="llm-review" data-t="llm.btn2">Send 1 label to review</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="llm.cite">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). <i>PNAS, 120</i>(30). Pangakis, N., Wolken, S., &amp; Fasching, N. (2023). <i>arXiv:2306.00176</i>. Di Leo, N. (2026b). Manuscript submitted for publication.</p>
+      </article>
+
+      <!-- ===== 10 ONE RECORD FOR BOTH WORKFLOWS ===== -->
+      <article class="page" id="p-record">
+        <header class="pg-head"><h2 class="pg-title" data-t="record.title">ONE RECORD FOR BOTH WORKFLOWS</h2></header>
+        <div class="two-col rc-cols">
+          <div class="txt">
+            <p class="in" data-t="record.p1">Audits of builds and mappings of existing games should produce the same record, so that their results can be compared.</p>
+            <p class="in" data-t="record.p2">A record should include the game version, the guideline and the source, and quote or show the evidence. It answers four questions separately: does the guideline apply, is the feature implemented, is it documented, has it been confirmed in play? Confidence and reviewer notes stay attached.</p>
+            <p class="in" data-t="record.p3">A single accessibility score would discard all of this. With the records, players can look up the evidence that concerns them, developers can find working examples, and researchers can compare releases over time.</p>
+          </div>
+          <section class="win jit in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="record.win">Record</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <div class="seg-tabs" role="tablist" aria-label="Source of the record">
+                <button class="seg-tab on" type="button" role="tab" aria-selected="true" data-r="a" data-t="record.tab1">Human audit</button>
+                <button class="seg-tab" type="button" role="tab" aria-selected="false" data-r="b" data-step="1" data-fn="rec" data-t="record.tab2">Model first pass</button>
+              </div>
+              <dl class="rec" data-r="a">
+                <dt>game</dt><dd data-t="record.a1">South of Midnight, PC version used in the audit</dd>
+                <dt>guideline</dt><dd data-t="record.a2">Use an easily readable default font size</dd>
+                <dt>category</dt><dd data-t="record.a3">Vision and Cognitive, Basic</dd>
+                <dt>source</dt><dd data-t="record.a4">First 60 minutes of play; official accessibility page</dd>
+                <dt>evidence</dt><dd data-t="record.a5">Readable fonts in play; not mentioned on the page</dd>
+                <dt>status</dt><dd class="rec-st"><span class="st st-y" data-t="record.a6">applies</span><span class="st st-y" data-t="record.a7">implemented</span><span class="st st-n" data-t="record.a8">not documented</span><span class="st st-q" data-t="record.a9">not tested with players</span></dd>
+                <dt>coded by</dt><dd data-t="record.a10">Two evaluators (κ = 0.92 across the audit)</dd>
+                <dt>notes</dt><dd data-t="record.a11">Basic good design like this is rarely documented as accessibility.</dd>
+              </dl>
+              <dl class="rec" data-r="b" hidden>
+                <dt>game</dt><dd data-t="record.b1">South of Midnight, version given in the review</dd>
+                <dt>guideline</dt><dd data-t="record.b2">Ensure that all settings are saved/remembered</dd>
+                <dt>category</dt><dd data-t="record.b3">General, Basic</dd>
+                <dt>source</dt><dd data-t="record.b4">Review passage on the previous slide</dd>
+                <dt>evidence</dt><dd data-t="record.b5">“my custom key bindings were gone every time I restarted”</dd>
+                <dt>status</dt><dd class="rec-st"><span class="st st-y" data-t="record.b6">applies</span><span class="st st-n" data-t="record.b7">not implemented</span><span class="st st-q" data-t="record.b8">documentation: check</span><span class="st st-q" data-t="record.b9">confirm in play</span></dd>
+                <dt>coded by</dt><dd data-t="record.b10">Language model, first pass; confidence 0.90</dd>
+                <dt>notes</dt><dd data-t="record.b11">Matches the bug found in the audit.</dd>
+              </dl>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- ===== 11 WHERE IT CAN GO WRONG ===== -->
+      <article class="page" id="p-limits">
+        <header class="pg-head"><h2 class="pg-title" data-t="limits.title">WHERE IT CAN GO WRONG</h2></header>
+        <div class="two-col li-cols">
+          <div class="txt">
+            <ul class="dash">
+              <li class="in" data-t="limits.l1">A model can miss barriers that appear after the first hour, or only under time pressure.</li>
+              <li class="in" data-t="limits.l2">It can misread game state: in a single frame, a paused menu, a cutscene and live play can look alike.</li>
+              <li class="in" data-t="limits.l3">It can take a settings toggle for a feature that works.</li>
+              <li class="in" data-t="limits.l4">The sources have gaps. Speech guidelines are mentioned in 1.3% of the cases where they could be, so some disabilities and player groups are barely represented.</li>
+            </ul>
+            <p class="note frame in" data-t="limits.note">Any system needs traceable evidence and version history, then expert review and testing with disabled players.</p>
+          </div>
+          <div class="pairs">
+            <h3 class="q-head in" data-t="limits.head">In the menu, and in play</h3>
+            <div class="pair">
+              <p class="pair-m"><span data-t="limits.m1">Remap controls</span><i class="tog-on"></i></p>
+              <button class="dialog" type="button" data-step="1" data-t="limits.d1" data-text="Bindings reset at every launch. (South of Midnight)"><span class="dlg-text"></span><i class="dlg-more" aria-hidden="true"></i></button>
+            </div>
+            <div class="pair">
+              <p class="pair-m"><span data-t="limits.m2">Two Button controls</span><i class="tog-on"></i></p>
+              <button class="dialog" type="button" data-step="2" data-t="limits.d2" data-text="Switched off in competitive modes. (EA Sports FC 26)"><span class="dlg-text"></span><i class="dlg-more" aria-hidden="true"></i></button>
+            </div>
+            <div class="pair">
+              <p class="pair-m pair-none"><span data-t="limits.m3">No matching setting</span></p>
+              <button class="dialog" type="button" data-step="3" data-t="limits.d3" data-text="Combat rebuilt without double jump or dash, lowering the physical demands for every player. (DOOM: The Dark Ages)"><span class="dlg-text"></span><i class="dlg-more" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== 12 WHAT A REPORT CAN CLAIM ===== -->
+      <article class="page" id="p-claims">
+        <header class="pg-head"><h2 class="pg-title" data-t="claims.title">WHAT A REPORT CAN CLAIM</h2></header>
+        <div class="claims" id="claims" data-advance>
+          <section class="win claim-col in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><h3 class="win-title" data-t="claims.can">It can claim</h3><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <p class="claim" data-step="1" data-fn="claim" data-t="claims.c1">“Feature X was observed in version Y, and here is the evidence.”</p>
+              <p class="claim" data-step="3" data-fn="claim" data-t="claims.c2">“The studio’s accessibility page does not mention feature X.”</p>
+              <p class="claim" data-step="5" data-fn="claim" data-t="claims.c3">“In N of these reviews, feature X is described as working.”</p>
+            </div>
+          </section>
+          <section class="win claim-col in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><h3 class="win-title" data-t="claims.cannot">It cannot claim</h3><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <p class="claim" data-step="2" data-fn="claim" data-t="claims.n1">“This game is accessible.”</p>
+              <p class="claim" data-step="4" data-fn="claim" data-t="claims.n2">“Feature X works for every player who needs it.”</p>
+              <p class="claim" data-step="6" data-fn="claim" data-t="claims.n3">“A guideline nobody mentioned causes no problems.”</p>
+            </div>
+          </section>
+        </div>
+        <p class="goal frame in"><span class="goal-k" data-t="claims.tryk">Try it:</span> <span class="goal-s" data-t="claims.try">take one game or 20 reviews, choose ten basic guidelines, let a model propose labels with evidence, check every label by hand, and keep the records.</span></p>
+        <p class="wall-hint" id="claims-hint" data-advance>Click, or press the right arrow, to sort the statements</p>
+      </article>
+
+      <!-- ===== 13 THANK YOU ===== -->
+      <article class="page" id="p-end">
+        <div class="end-wrap">
+          <div class="end-text">
+            <h2 class="end-title in" data-t="end.title">THANK YOU</h2>
+            <p class="end-name in" data-t="end.name">Nadia Di Leo</p>
+            <ul class="end-mail in">
+              <li data-t="end.mail"><a href="mailto:nadia.dileo@unifg.it">nadia.dileo@unifg.it</a></li>
+            </ul>
+          </div>
+          <section class="win end-qr jit in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="end.win">My website</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <svg class="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR code linking to nadiadileo.neocities.org"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM10 0h1v1h-1zM12 0h1v1h-1zM13 0h1v1h-1zM16 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM25 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM11 1h1v1h-1zM12 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM19 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM19 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM18 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM13 5h1v1h-1zM17 5h1v1h-1zM19 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM9 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM18 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM17 8h1v1h-1zM20 8h1v1h-1zM24 8h1v1h-1zM27 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM28 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM20 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM27 11h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM1 13h1v1h-1zM2 13h1v1h-1zM8 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM22 13h1v1h-1zM25 13h1v1h-1zM28 13h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM10 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM0 15h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM10 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM22 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM1 17h1v1h-1zM4 17h1v1h-1zM5 17h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM28 17h1v1h-1zM0 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM1 19h1v1h-1zM3 19h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM27 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM10 21h1v1h-1zM13 21h1v1h-1zM16 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM0 22h1v1h-1zM1 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM12 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM27 22h1v1h-1zM28 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM14 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM27 23h1v1h-1zM0 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h1v1h-1zM3 25h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM10 25h1v1h-1zM11 25h1v1h-1zM14 25h1v1h-1zM16 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM28 25h1v1h-1zM0 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM9 27h1v1h-1zM11 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM27 27h1v1h-1zM0 28h1v1h-1zM1 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1z"/></svg>
+              <p class="qr-cap">nadiadileo.neocities.org</p>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- ===== 14 REFERENCES ===== -->
+      <article class="page" id="p-refs">
+        <header class="pg-head"><h2 class="pg-title">REFERENCES</h2></header>
+        <div class="refs in">
+          <p data-t="refs.r1">Ai2. (2026, May 21). <i>Building accessibility tools on a truly open foundation</i>. https://allenai.org/blog/global-accessibility-awareness-day-2026</p>
+          <p data-t="refs.r2">Barnett, L., Harvey, C., &amp; Gatzidis, C. (2018). First time user experiences in mobile games: An evaluation of usability. <i>Entertainment Computing, 27</i>, 82–88.</p>
+          <p data-t="refs.r3">Di Leo, N. (2025). Theoretical framework for video game accessibility: Bridging user experiences and industry data for inclusive design. In <i>Technology for Inclusion and Participation for All: Recent Achievements and Future Directions (AAATE 2025)</i> (pp. 304–314). Springer. https://doi.org/10.1007/978-3-032-01628-7_37</p>
+          <p data-t="refs.r4">Di Leo, N. (2026a). <i>A matter of accessibility: A guidelines-based accessibility evaluation of award-nominated video games</i> (manuscript under review).</p>
+          <p data-t="refs.r5">Di Leo, N. (2026b). <i>The reception of Minecraft Education Edition in user reviews: An LLM-assisted thematic analysis</i> (manuscript submitted for publication).</p>
+          <p data-t="refs.r6">Di Leo, N., &amp; Tarantino, A. (2026). From checklists to playability: A systematic mapping of player reviews to the Game Accessibility Guidelines. In <i>Proceedings of DiGRA 2026</i>. https://doi.org/10.26503/dl.v2026i3.2833</p>
+          <p data-t="refs.r7">Game Accessibility Guidelines. (n.d.). <i>Game accessibility guidelines: A straightforward reference for inclusive game design</i>. https://gameaccessibilityguidelines.com</p>
+          <p data-t="refs.r8">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. <i>PNAS, 120</i>(30), e2305016120.</p>
+          <p data-t="refs.r9">Pangakis, N., Wolken, S., &amp; Fasching, N. (2023). <i>Automated annotation with generative AI requires validation</i>. arXiv:2306.00176.</p>
+          <p data-t="refs.r10">Rongen, M. (2026, May 22). Assassin’s Creed Shadows wins Canadian Game Award for accessibility. <i>Can I Play That?</i></p>
+          <p data-t="refs.r11">Squires-Hand, L. (2025, December 12). Over 19,000 games have released on Steam in 2025, with nearly half seeing fewer than 10 reviews. <i>GamingOnLinux</i>.</p>
+          <p data-t="refs.r12">Taesiri, M. R., Feng, T., Bezemer, C.-P., &amp; Nguyen, A. (2024). GlitchBench: Can large multimodal models detect video game glitches? In <i>CVPR 2024</i> (pp. 22444–22455).</p>
+          <p data-t="refs.r13">Works, B. (2026). <i>PointCheck</i> [Computer software]. GitHub. https://github.com/BrendanWorks/PointCheck</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- HUD -->
+    <button class="btn btn-sm hud-lib" type="button" data-act="library" title="Back to the library (M)"><svg class="ic ic-shelf"><use href="#i-shelf"/></svg> Library</button>
+    <nav class="minishelf" id="minishelf" aria-label="Talk sections"></nav>
+    <div class="hud-nav">
+      <button class="btn btn-sm btn-icon" id="btn-prev" type="button" aria-label="Previous"><svg class="ic ic-flip"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-sm" id="btn-next" type="button"><span id="next-lbl">Next</span> <svg class="ic"><use href="#i-arrow"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ============================== OVERLAYS ============================== -->
+  <div id="zoom-layer" aria-hidden="true"></div>
+
+  <section id="settings" class="win win-modal" role="dialog" aria-modal="true" aria-labelledby="set-title" style="--acc:var(--lilac)" hidden>
+    <div class="win-bar"><button class="win-close" type="button" aria-label="Close settings" data-act="settings-close"></button><h2 class="win-title" id="set-title">Settings</h2><i class="win-zoom"></i></div>
+    <div class="win-body">
+      <label class="set-row"><input type="checkbox" id="opt-motion"> <span>Reduce motion</span></label>
+      <table class="keys">
+        <tr><th>Right arrow, Space, Page Down</th><td>Next, or the next step on the page</td></tr>
+        <tr><th>Left arrow, Page Up</th><td>Previous</td></tr>
+        <tr><th>Up and down arrows</th><td>Browse the shelf</td></tr>
+        <tr><th>M or Esc</th><td>Back to the library</td></tr>
+        <tr><th>F</th><td>Fullscreen</td></tr>
+        <tr><th>B</th><td>Black screen</td></tr>
+        <tr><th>S</th><td>These settings</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged figure" hidden><img alt=""><button class="win-close lb-close" type="button" aria-label="Close"></button></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+</div>
+
+<div id="blackout" hidden></div>
+<p id="live" class="sr-only" aria-live="polite"></p>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
