@@ -844,66 +844,6 @@
   var fmt1 = function (v) { return v.toFixed(1); };
   var TICK = '<svg class="ic-mark"><use href="#i-tick"/></svg>', CROSS = '<svg class="ic-mark"><use href="#i-cross"/></svg>';
 
-  /* ---------- 01 present, documented, usable: range chart ---------- */
-  var ranges = $('#ranges'), rgGames = $('#rg-games');
-  (function buildRanges() {
-    ['impl', 'doc'].forEach(function (k) {
-      var track = $('.rg-row[data-k="' + k + '"] .rg-track', ranges);
-      var vals = WG.awards.map(function (a) { return a[k]; });
-      var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
-      var html = '<div class="rg-band" data-l="' + lo + '" data-w="' + (hi - lo) + '" style="left:' + lo + '%"></div>' +
-        '<span class="rg-val" style="left:' + lo + '%">' + fmt1(lo) + '</span><span class="rg-val" style="left:' + hi + '%">' + fmt1(hi) + '</span>';
-      // games closer than 2.5 points are nudged apart vertically, one above the track's middle and one below
-      var sorted = WG.awards.slice().sort(function (a, b) { return a[k] - b[k]; }), dy = sorted.map(function () { return 0; });
-      for (var i = 1; i < sorted.length; i++) {
-        if (sorted[i][k] - sorted[i - 1][k] < 2.5) { if (dy[i - 1] === 0) dy[i - 1] = -10; dy[i] = dy[i - 1] < 0 ? 10 : -10; }
-      }
-      sorted.forEach(function (a, i) {
-        html += '<span class="rg-dot" data-g="' + a.id + '" style="left:' + a[k] + '%;margin-top:' + (-7 + dy[i]) + 'px" title="' + a.name + ': ' + fmt1(a[k]) + '%"></span>';
-      });
-      track.innerHTML = html;
-    });
-    rgGames.innerHTML = WG.awards.map(function (a) { return '<button type="button" data-g="' + a.id + '" aria-pressed="false">' + a.short + '</button>'; }).join('');
-  })();
-  function pickGame(id) {
-    $$('.rg-tip', ranges).forEach(function (t) { t.remove(); });
-    $$('button', rgGames).forEach(function (b) { var on = b.dataset.g === id; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
-    ranges.classList.toggle('pick', !!id);
-    $$('.rg-dot', ranges).forEach(function (d) {
-      var on = d.dataset.g === id;
-      d.classList.toggle('on', on);
-      if (on) {
-        var a = WG.awards.filter(function (x) { return x.id === id; })[0], k = d.closest('.rg-row').dataset.k;
-        var tip = document.createElement('span');
-        tip.className = 'rg-tip'; tip.style.left = d.style.left; tip.textContent = fmt1(a[k]) + '%';
-        d.parentNode.appendChild(tip);
-      }
-    });
-  }
-  rgGames.addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
-    pickGame(b.classList.contains('on') ? null : b.dataset.g);
-  });
-  PAGES['p-intro'] = {
-    init: function () {
-      pickGame(null);
-      $$('.rg-band', ranges).forEach(function (b) { b.style.transition = 'none'; b.style.width = '0'; });
-      $$('.rg-dot, .rg-val', ranges).forEach(function (d) { d.style.opacity = 0; });
-      void ranges.offsetWidth;
-    },
-    enter: function (p, instant) {
-      $$('.rg-band', ranges).forEach(function (b, k) {
-        b.style.transition = instant ? 'none' : '';
-        b.style.transitionDelay = instant ? '' : (500 + k * 250) + 'ms';
-        b.style.width = b.dataset.w + '%';
-      });
-      $$('.rg-dot, .rg-val', ranges).forEach(function (d, k) {
-        if (instant) { d.style.opacity = 1; return; }
-        later(function () { d.style.opacity = 1; }, 700 + k * 60);
-      });
-    }
-  };
-
   /* ---------- part 1: the audit sheet ---------- */
   var sheet = $('#sheet');
   function setCell(c, s) {

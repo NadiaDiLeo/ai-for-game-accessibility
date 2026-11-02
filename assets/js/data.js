@@ -14,9 +14,9 @@ WG.items = [
     "blurb": "Auditing prototypes and mapping released games.",
     "pages": [{ "id": "title", "label": "Title screen" }] },
 
-  { "id": "intro", "kind": "case", "num": "01", "title": "Present, documented, usable",
-    "blurb": "Three measures that a single accessibility score folds together.",
-    "pages": [{ "id": "p-intro", "label": "Present, documented, usable" }] },
+  { "id": "intro", "kind": "case", "num": "01", "title": "What this talk asks",
+    "blurb": "The question behind the talk and the route through its two parts.",
+    "pages": [{ "id": "p-roadmap", "label": "What this talk asks" }] },
 
   { "id": "part1", "kind": "label", "num": "", "part": 1, "title": "Auditing games",
     "blurb": "Can a model help check a game against the guidelines?",
@@ -35,8 +35,8 @@ WG.items = [
     "pages": [{ "id": "p-builds", "label": "From web pages to playable builds" }] },
 
   { "id": "model", "kind": "case", "num": "05", "part": 1, "title": "A model for games",
-    "blurb": "An HPC grant application to train an open model that audits game builds.",
-    "pages": [{ "id": "p-model", "label": "A model for games" }] },
+    "blurb": "A grant application, under review, to train small open models that check game builds against the guidelines.",
+    "pages": [{ "id": "p-model", "label": "A model for games" }, { "id": "p-model-2", "label": "How the model would be trained" }] },
 
   { "id": "part2", "kind": "label", "num": "", "part": 2, "title": "Mapping games",
     "blurb": "Can a model map what players and studios already publish?",
@@ -48,22 +48,22 @@ WG.items = [
 
   { "id": "cipt", "kind": "case", "num": "07", "part": 2, "title": "What 448 reviews talk about",
     "blurb": "Six themes in Can I Play That? accessibility reviews, 2019–2024.",
-    "pages": [{ "id": "p-cipt", "label": "What 448 reviews talk about" }] },
+    "pages": [{ "id": "p-cipt", "label": "What 448 reviews talk about" }, { "id": "p-cipt-2", "label": "How the themes were found" }] },
 
   { "id": "checklists", "kind": "case", "num": "08", "part": 2, "title": "From checklists to playability",
     "blurb": "479 reviews mapped onto the Game Accessibility Guidelines by hand.",
     "pages": [{ "id": "p-check-1", "label": "The mapping" }, { "id": "p-check-2", "label": "What the reviews mention" }] },
 
   { "id": "llm", "kind": "case", "num": "09", "part": 2, "title": "Scaling the mapping",
-    "blurb": "A language model for the first pass, people for the rest.",
-    "pages": [{ "id": "p-llm", "label": "Scaling the mapping" }] },
+    "blurb": "A language model for the first pass, people for the rest, and the experiment that should come first.",
+    "pages": [{ "id": "p-llm", "label": "Scaling the mapping" }, { "id": "p-llm-2", "label": "Testing the first pass" }] },
 
   { "id": "record", "kind": "case", "num": "10", "part": 2, "title": "One record for both workflows",
     "blurb": "The fields every observation should carry.",
     "pages": [{ "id": "p-record", "label": "One record for both workflows" }] },
 
   { "id": "limits", "kind": "case", "num": "11", "part": 2, "title": "Where it can go wrong",
-    "blurb": "Failure modes, gaps in the data, and the safeguards they call for.",
+    "blurb": "Failure modes, gaps in the data, and a first precaution for each.",
     "pages": [{ "id": "p-limits", "label": "Where it can go wrong" }] },
 
   { "id": "claims", "kind": "case", "num": "12", "part": 2, "title": "What a report can claim",

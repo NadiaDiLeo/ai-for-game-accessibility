@@ -97,41 +97,43 @@
   <section id="scr-deck" class="screen" aria-label="Talk">
     <div id="pages">
 
-      <!-- ===== 01 PRESENT, DOCUMENTED, USABLE ===== -->
-      <article class="page" id="p-intro">
-        <header class="pg-head"><h2 class="pg-title" data-t="intro.title">PRESENT, DOCUMENTED, USABLE</h2></header>
-        <div class="two-col intro-cols">
-          <div class="txt">
-            <p class="in" data-t="intro.p1">In 2025, five games were nominated for Innovation in Accessibility at The Game Awards. I audited all five against 121 <a class="tlink" href="#w-gagfull" role="button" data-open="w-gagfull" data-step="1">Game Accessibility Guidelines</a>.</p>
-            <p class="in" data-t="intro.p2">Each game implemented between 74.5% and 83.2% of the guidelines that applied to it. Official materials mentioned only 25.5% to 48.6% of those features, so most of what the games offered was invisible to players deciding whether to buy them.</p>
-            <p class="in" data-t="intro.p3">A feature can also be there and still fail in play. During the audit, a bug made South of Midnight forget custom key bindings at every launch.</p>
-            <p class="note frame in" data-t="intro.note">I keep these as three separate measures: is the feature there, is it documented, and does it work for the player?</p>
+      <!-- ===== 01 WHAT THIS TALK ASKS ===== -->
+      <article class="page" id="p-roadmap">
+        <header class="pg-head"><h2 class="pg-title" data-t="road.title">WHAT THIS TALK ASKS</h2></header>
+        <div class="two-col rd-cols">
+          <div class="rd-left">
+            <div class="txt">
+              <p class="rd-q in" data-t="road.q">Can AI help collect evidence about a game’s accessibility, and where does that help stop?</p>
+              <p class="in" data-t="road.p1">The evidence comes from two kinds of work. Experts audit games against accessibility guidelines, and players and studios publish what they find. Both take a long time by hand.</p>
+              <p class="in" data-t="road.p2">Each part of the talk starts from a study done by people. Then I look at what a model could take over, and where it gets things wrong.</p>
+            </div>
+            <div class="rd-qr frame in">
+              <svg class="qr qr-sm" viewBox="0 0 33 33" shape-rendering="crispEdges" role="img" aria-label="QR code linking to these slides at nadiadileo.github.io/ai-for-game-accessibility"><path d="M0 0h7v1h-7zM10 0h1v1h-1zM16 0h1v1h-1zM19 0h3v1h-3zM23 0h1v1h-1zM26 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h2v1h-2zM12 1h1v1h-1zM15 1h2v1h-2zM20 1h3v1h-3zM26 1h1v1h-1zM32 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h2v1h-2zM11 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM21 2h2v1h-2zM24 2h1v1h-1zM26 2h1v1h-1zM28 2h3v1h-3zM32 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h4v1h-4zM17 3h1v1h-1zM19 3h2v1h-2zM22 3h1v1h-1zM24 3h1v1h-1zM26 3h1v1h-1zM28 3h3v1h-3zM32 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM12 4h1v1h-1zM14 4h3v1h-3zM19 4h5v1h-5zM26 4h1v1h-1zM28 4h3v1h-3zM32 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM11 5h1v1h-1zM20 5h3v1h-3zM26 5h1v1h-1zM32 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h7v1h-7zM8 7h1v1h-1zM10 7h3v1h-3zM14 7h1v1h-1zM16 7h1v1h-1zM18 7h1v1h-1zM21 7h1v1h-1zM23 7h2v1h-2zM0 8h1v1h-1zM2 8h5v1h-5zM9 8h1v1h-1zM11 8h1v1h-1zM13 8h2v1h-2zM17 8h1v1h-1zM19 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h5v1h-5zM0 9h1v1h-1zM3 9h2v1h-2zM7 9h1v1h-1zM11 9h1v1h-1zM13 9h1v1h-1zM17 9h5v1h-5zM23 9h1v1h-1zM26 9h2v1h-2zM29 9h2v1h-2zM32 9h1v1h-1zM1 10h3v1h-3zM6 10h2v1h-2zM9 10h1v1h-1zM11 10h1v1h-1zM13 10h4v1h-4zM18 10h1v1h-1zM20 10h1v1h-1zM25 10h2v1h-2zM28 10h1v1h-1zM30 10h2v1h-2zM1 11h1v1h-1zM3 11h1v1h-1zM7 11h3v1h-3zM13 11h1v1h-1zM16 11h1v1h-1zM19 11h4v1h-4zM24 11h2v1h-2zM28 11h3v1h-3zM32 11h1v1h-1zM0 12h2v1h-2zM3 12h2v1h-2zM6 12h3v1h-3zM12 12h1v1h-1zM14 12h1v1h-1zM16 12h3v1h-3zM22 12h4v1h-4zM27 12h3v1h-3zM31 12h1v1h-1zM1 13h2v1h-2zM4 13h1v1h-1zM8 13h1v1h-1zM11 13h3v1h-3zM15 13h1v1h-1zM17 13h4v1h-4zM22 13h2v1h-2zM26 13h1v1h-1zM29 13h1v1h-1zM31 13h2v1h-2zM0 14h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM12 14h1v1h-1zM15 14h2v1h-2zM18 14h1v1h-1zM21 14h1v1h-1zM25 14h2v1h-2zM29 14h1v1h-1zM31 14h1v1h-1zM0 15h3v1h-3zM4 15h1v1h-1zM7 15h4v1h-4zM14 15h2v1h-2zM18 15h1v1h-1zM20 15h8v1h-8zM29 15h2v1h-2zM1 16h1v1h-1zM3 16h2v1h-2zM6 16h3v1h-3zM13 16h3v1h-3zM17 16h1v1h-1zM19 16h1v1h-1zM22 16h1v1h-1zM24 16h2v1h-2zM27 16h3v1h-3zM32 16h1v1h-1zM2 17h1v1h-1zM4 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM12 17h1v1h-1zM16 17h2v1h-2zM19 17h3v1h-3zM23 17h1v1h-1zM26 17h2v1h-2zM29 17h2v1h-2zM32 17h1v1h-1zM1 18h2v1h-2zM6 18h1v1h-1zM10 18h1v1h-1zM12 18h2v1h-2zM15 18h3v1h-3zM24 18h2v1h-2zM27 18h2v1h-2zM30 18h2v1h-2zM1 19h1v1h-1zM4 19h2v1h-2zM7 19h2v1h-2zM10 19h6v1h-6zM19 19h4v1h-4zM25 19h1v1h-1zM27 19h5v1h-5zM1 20h1v1h-1zM6 20h1v1h-1zM12 20h3v1h-3zM18 20h2v1h-2zM22 20h1v1h-1zM24 20h1v1h-1zM27 20h3v1h-3zM31 20h2v1h-2zM0 21h2v1h-2zM4 21h1v1h-1zM9 21h1v1h-1zM11 21h2v1h-2zM14 21h3v1h-3zM18 21h3v1h-3zM23 21h1v1h-1zM26 21h1v1h-1zM30 21h1v1h-1zM32 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM6 22h3v1h-3zM10 22h1v1h-1zM14 22h1v1h-1zM20 22h3v1h-3zM25 22h2v1h-2zM28 22h1v1h-1zM31 22h1v1h-1zM0 23h1v1h-1zM2 23h1v1h-1zM8 23h4v1h-4zM13 23h2v1h-2zM16 23h1v1h-1zM21 23h1v1h-1zM24 23h1v1h-1zM26 23h1v1h-1zM30 23h3v1h-3zM0 24h1v1h-1zM3 24h1v1h-1zM5 24h2v1h-2zM8 24h1v1h-1zM10 24h1v1h-1zM12 24h3v1h-3zM17 24h1v1h-1zM19 24h1v1h-1zM22 24h1v1h-1zM24 24h5v1h-5zM31 24h1v1h-1zM8 25h2v1h-2zM13 25h2v1h-2zM16 25h4v1h-4zM24 25h1v1h-1zM28 25h1v1h-1zM30 25h1v1h-1zM32 25h1v1h-1zM0 26h7v1h-7zM13 26h3v1h-3zM17 26h1v1h-1zM20 26h2v1h-2zM23 26h2v1h-2zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM11 27h1v1h-1zM16 27h9v1h-9zM28 27h4v1h-4zM0 28h1v1h-1zM2 28h3v1h-3zM6 28h1v1h-1zM8 28h3v1h-3zM14 28h1v1h-1zM16 28h1v1h-1zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h6v1h-6zM32 28h1v1h-1zM0 29h1v1h-1zM2 29h3v1h-3zM6 29h1v1h-1zM8 29h3v1h-3zM13 29h1v1h-1zM15 29h1v1h-1zM18 29h4v1h-4zM23 29h3v1h-3zM28 29h2v1h-2zM31 29h2v1h-2zM0 30h1v1h-1zM2 30h3v1h-3zM6 30h1v1h-1zM8 30h3v1h-3zM13 30h1v1h-1zM15 30h4v1h-4zM21 30h2v1h-2zM24 30h1v1h-1zM26 30h2v1h-2zM29 30h2v1h-2zM0 31h1v1h-1zM6 31h1v1h-1zM10 31h2v1h-2zM14 31h2v1h-2zM18 31h2v1h-2zM21 31h2v1h-2zM25 31h2v1h-2zM28 31h3v1h-3zM0 32h7v1h-7zM8 32h3v1h-3zM12 32h1v1h-1zM14 32h2v1h-2zM17 32h2v1h-2zM22 32h4v1h-4zM27 32h1v1h-1zM31 32h1v1h-1z"/></svg>
+              <p><span class="rd-qr-k" data-t="road.qrk">Follow the slides on your own screen</span><a href="https://nadiadileo.github.io/ai-for-game-accessibility/" target="_blank" rel="noopener">nadiadileo.github.io/<wbr>ai-for-game-accessibility</a></p>
+            </div>
           </div>
-          <section class="win jit in" style="--acc:var(--lilac)">
-            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="intro.win">Five nominees, three measures</span><i class="win-zoom"></i></div>
+          <section class="win jit in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="road.win">Route</span><i class="win-zoom"></i></div>
             <div class="win-body">
-              <div class="ranges" id="ranges" role="img" aria-label="Range chart. Implemented, as a percentage of applicable guidelines: from 74.5 (EA Sports FC 26) to 83.2 (South of Midnight). Documented, as a percentage of implemented features: from 25.5 (South of Midnight) to 48.6 (EA Sports FC 26). Works in play: not measured by the audit, it needs testing with players.">
-                <div class="rg-row" data-k="impl"><p class="rg-l"><b data-t="intro.r1">Implemented</b><span data-t="intro.r1d">% of applicable guidelines</span></p><div class="rg-track"></div></div>
-                <div class="rg-row" data-k="doc"><p class="rg-l"><b data-t="intro.r2">Documented</b><span data-t="intro.r2d">% of implemented features</span></p><div class="rg-track"></div></div>
-                <div class="rg-row" data-k="play"><p class="rg-l"><b data-t="intro.r3">Works in play</b><span data-t="intro.r3d">for the players who need it</span></p><div class="rg-track rg-none"><span data-t="intro.r3n">not measured by the audit: it needs testing with players</span></div></div>
-                <div class="rg-axis" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
-              </div>
-              <div class="rg-games" id="rg-games" aria-label="Highlight one game"></div>
+              <ol class="rt" id="route" data-advance>
+                <li data-step="1" data-fn="tl">
+                  <p class="rt-h"><b>PART 1</b><span data-t="road.s1">Auditing games</span></p>
+                  <p class="rt-r"><em>People</em><span data-t="road.s1p">Two evaluators audit the five 2025 award nominees against 121 guidelines.</span></p>
+                  <p class="rt-r"><em>AI</em><span data-t="road.s1a">A vision-language model could check a playable build and flag evidence for a specialist.</span></p>
+                </li>
+                <li data-step="2" data-fn="tl">
+                  <p class="rt-h"><b>PART 2</b><span data-t="road.s2">Mapping games</span></p>
+                  <p class="rt-r"><em>People</em><span data-t="road.s2p">479 player reviews mapped onto the same guidelines by hand.</span></p>
+                  <p class="rt-r"><em>AI</em><span data-t="road.s2a">GPT-4o grouped 448 reviews into six themes. A model could also take the first pass of the mapping, with people checking it.</span></p>
+                </li>
+                <li data-step="3" data-fn="tl">
+                  <p class="rt-h"><b>THEN</b><span data-t="road.s3">Both workflows</span></p>
+                  <p class="rt-r rt-one"><span data-t="road.s3t">One shared record, where it can go wrong, and what a report can claim.</span></p>
+                </li>
+              </ol>
             </div>
           </section>
         </div>
-
-        <section class="win win-float win-browser jit" id="w-gagfull" style="--acc:var(--blue)" hidden>
-          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title">Game accessibility guidelines</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
-          <p class="win-addr">gameaccessibilityguidelines.com/full-list</p>
-          <div class="win-scroll" tabindex="0" aria-label="Full list of the Game Accessibility Guidelines">
-            <img src="assets/img/gag-full-1.png" alt="The Game Accessibility Guidelines website, full list page. Levels explained: basic, intermediate, advanced. Motor guidelines follow." width="960" height="2400" loading="lazy">
-            <img src="assets/img/gag-full-2.png" alt="Full list continued: motor and cognitive guidelines." width="960" height="2400" loading="lazy">
-            <img src="assets/img/gag-full-3.png" alt="Full list continued: cognitive and vision guidelines." width="960" height="2400" loading="lazy">
-            <img src="assets/img/gag-full-4.png" alt="Full list continued: vision and hearing guidelines." width="960" height="2400" loading="lazy">
-            <img src="assets/img/gag-full-5.png" alt="Full list continued: speech and general guidelines." width="960" height="1722" loading="lazy">
-          </div>
-        </section>
       </article>
 
       <!-- ===== PART 1 ===== -->
@@ -162,13 +164,13 @@
       <article class="page" id="p-awards-1">
         <header class="pg-head">
           <h2 class="pg-title" data-t="awards1.title">AUDITING THE 2025 NOMINEES</h2>
-          <p class="pg-sub" data-t="awards1.sub">121 guidelines, two evaluators, the first hour of play</p>
+          <p class="pg-sub" data-t="awards1.sub">121 guidelines, two human evaluators, the first hour of play</p>
         </header>
         <div class="two-col aw1-cols">
-          <div class="txt">
-            <p class="in" data-t="awards1.p1">The nominees were Assassin’s Creed Shadows, Atomfall, DOOM: The Dark Ages, EA Sports FC 26 and South of Midnight: stealth, survival, a fast shooter, football and a narrative adventure.</p>
-            <p class="in" data-t="awards1.p2">First, we mapped every feature listed in each studio’s accessibility materials to a guideline. Then two evaluators played the first 60 minutes of each game on PC, the first-time user experience (Barnett et al., 2018), and scored every guideline as pass (1), partial (0.5), fail (0) or not applicable. They agreed closely (Cohen’s κ = 0.92).</p>
-            <p class="note frame in" data-t="awards1.note">DOOM: The Dark Ages won the award and ranked third in the audit. South of Midnight ranked first.</p>
+          <div class="txt txt-sm">
+            <p class="in" data-t="awards1.p1">In 2025, five games were nominated for Innovation in Accessibility at The Game Awards: Assassin’s Creed Shadows, Atomfall, DOOM: The Dark Ages, EA Sports FC 26 and South of Midnight. With a second evaluator, I audited all five by hand against 121 <a class="tlink" href="#w-gagfull" role="button" data-open="w-gagfull" data-step="1">Game Accessibility Guidelines</a>.</p>
+            <p class="in" data-t="awards1.p2">We first matched each feature in the studios’ accessibility materials to a guideline. Then each evaluator played the first 60 minutes of every game on PC, the first-time user experience (Barnett et al., 2018), and scored every guideline as pass (1), partial (0.5), fail (0) or not applicable. The scores agreed closely: Cohen’s κ = 0.92, where 0 is chance agreement and 1 is perfect. A future goal is to run audits like this at scale, with AI doing the first pass.</p>
+            <p class="note frame in" data-t="awards1.note">I keep three measures apart: is a feature there, is it documented, and does it work for the players who need it? The audit measures the first two. A feature can be there and still fail: South of Midnight forgot custom key bindings at every launch.</p>
           </div>
           <section class="win jit in" style="--acc:var(--lilac)">
             <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="awards1.win">Implemented and documented</span><i class="win-zoom"></i></div>
@@ -179,7 +181,19 @@
             </div>
           </section>
         </div>
-        <p class="cite in" data-t="awards1.cite">Di Leo, N. (2026a). <i>A matter of accessibility: A guidelines-based accessibility evaluation of award-nominated video games</i> (manuscript under review).</p>
+        <p class="cite in" data-t="awards1.cite">Di Leo, N. (2026a). <i>A matter of accessibility: A guidelines-based accessibility evaluation of award-nominated video games</i> (manuscript under review). Barnett, L., Harvey, C., &amp; Gatzidis, C. (2018). <a href="https://doi.org/10.1016/j.entcom.2018.04.004" target="_blank" rel="noopener">First time user experiences in mobile games</a>. <i>Entertainment Computing, 27</i>.</p>
+
+        <section class="win win-float win-browser jit" id="w-gagfull" style="--acc:var(--blue)" hidden>
+          <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title">Game accessibility guidelines</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
+          <p class="win-addr">gameaccessibilityguidelines.com/full-list</p>
+          <div class="win-scroll" tabindex="0" aria-label="Full list of the Game Accessibility Guidelines">
+            <img src="assets/img/gag-full-1.png" alt="The Game Accessibility Guidelines website, full list page. Levels explained: basic, intermediate, advanced. Motor guidelines follow." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-2.png" alt="Full list continued: motor and cognitive guidelines." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-3.png" alt="Full list continued: cognitive and vision guidelines." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-4.png" alt="Full list continued: vision and hearing guidelines." width="960" height="2400" loading="lazy">
+            <img src="assets/img/gag-full-5.png" alt="Full list continued: speech and general guidelines." width="960" height="1722" loading="lazy">
+          </div>
+        </section>
       </article>
 
       <!-- ===== 02 THE 2025 NOMINEES (2) ===== -->
@@ -272,7 +286,7 @@
             </div>
           </section>
         </div>
-        <p class="cite in" data-t="pc.cite">Works, B. (2026). <i>PointCheck</i> [Computer software]. GitHub. Ai2. (2026, May 21). <i>Building accessibility tools on a truly open foundation</i>.</p>
+        <p class="cite in" data-t="pc.cite">Works, B. (2026). <a href="https://github.com/BrendanWorks/PointCheck" target="_blank" rel="noopener"><i>PointCheck</i></a> [Computer software]. GitHub. Ai2. (2026, May 21). <a href="https://allenai.org/blog/global-accessibility-awareness-day-2026" target="_blank" rel="noopener"><i>Building accessibility tools on a truly open foundation</i></a>.</p>
       </article>
 
       <!-- ===== 04 FROM WEB PAGES TO PLAYABLE BUILDS ===== -->
@@ -318,21 +332,21 @@
             </div>
           </section>
         </div>
-        <p class="cite in" data-t="builds.cite">Squires-Hand, L. (2025, December 12). Over 19,000 games have released on Steam in 2025. <i>GamingOnLinux</i> (data: SteamDB). Taesiri, M. R., Feng, T., Bezemer, C.-P., &amp; Nguyen, A. (2024). GlitchBench. <i>CVPR 2024</i>.</p>
+        <p class="cite in" data-t="builds.cite">Squires-Hand, L. (2025, December 12). <a href="https://www.gamingonlinux.com/2025/12/over-19000-games-have-released-on-steam-in-2025-with-nearly-half-seeing-fewer-than-10-reviews" target="_blank" rel="noopener">Over 19,000 games have released on Steam in 2025</a>. <i>GamingOnLinux</i> (data: SteamDB). Taesiri, M. R., Feng, T., Bezemer, C.-P., &amp; Nguyen, A. (2024). <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Taesiri_GlitchBench_Can_Large_Multimodal_Models_Detect_Video_Game_Glitches_CVPR_2024_paper.html" target="_blank" rel="noopener">GlitchBench</a>. <i>CVPR 2024</i>.</p>
       </article>
 
-      <!-- ===== 05 A MODEL FOR GAMES ===== -->
+      <!-- ===== 05 A MODEL FOR GAMES (1) ===== -->
       <article class="page" id="p-model">
         <header class="pg-head">
           <h2 class="pg-title" data-t="model.title">A MODEL FOR GAMES</h2>
-          <p class="pg-sub" data-t="model.sub">An HPC grant application in preparation</p>
+          <p class="pg-sub" data-t="model.sub">A grant application for supercomputer time, under review</p>
         </header>
         <div class="two-col md-cols">
           <div class="txt">
             <p class="in" data-t="model.p1">Web pages now have tools like PointCheck. I have not found an open equivalent that checks a running game against the Game Accessibility Guidelines.</p>
-            <p class="in" data-t="model.p2">I am preparing an HPC grant application to train one. Shown a frame from a menu or from play, the model would point at the element a guideline is about and answer a question specific to that guideline, as PointCheck does for focus indicators.</p>
-            <p class="in" data-t="model.p3">The audits are a starting point: every game–guideline judgement comes with notes, and the annotated data will be openly released.</p>
-            <p class="note frame in" data-t="model.note">Unreleased builds are confidential, so the model has to run on a studio’s own machines.</p>
+            <p class="in" data-t="model.p2">To train one, I have applied for computing time with a project called A11YVLM. The application is under review, so no model has been trained yet.</p>
+            <p class="in" data-t="model.p3">A vision-language model takes images and text as input. Shown a screenshot of a menu or of play, ours would name the barrier, cite the guideline, say which players it affects and suggest a fix.</p>
+            <p class="note frame in" data-t="model.note">The models will be small, 2 to 9 billion parameters, so a studio can run them on its own machines without sending unreleased builds to anyone.</p>
           </div>
           <section class="win quest in" style="--acc:var(--lilac)">
             <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="model.win">Quest log</span><i class="win-zoom"></i></div>
@@ -340,15 +354,45 @@
               <p class="qst-h" data-t="model.quest">QUEST: AN ACCESSIBILITY AUDITOR FOR GAMES</p>
               <ul class="qst" id="quest">
                 <li class="done"><i class="qbox"></i><span data-t="model.q1">Audit five games against 121 guidelines</span></li>
-                <li class="now"><i class="qbox"></i><span data-t="model.q2">Secure HPC compute</span><em data-t="model.q2s">grant in preparation</em></li>
-                <li><i class="qbox"></i><span data-t="model.q3">Fine-tune an open vision-language model on annotated captures</span></li>
-                <li><i class="qbox"></i><span data-t="model.q4">Compare its judgements with human audits</span></li>
+                <li class="done"><i class="qbox"></i><span data-t="model.q1b">Map 479 reviews onto the guidelines by hand</span></li>
+                <li class="now"><i class="qbox"></i><span data-t="model.q2">Secure computing time</span><em data-t="model.q2s">under review</em></li>
+                <li><i class="qbox"></i><span data-t="model.q3">Build a training set checked by experts</span></li>
+                <li><i class="qbox"></i><span data-t="model.q3b">Fine-tune small open vision-language models</span></li>
+                <li><i class="qbox"></i><span data-t="model.q4">Compare their judgements with human audits</span></li>
                 <li><i class="qbox"></i><span data-t="model.q5">Test the flagged cases with disabled players</span></li>
                 <li><i class="qbox"></i><span data-t="model.q6">Release open weights that studios can run locally</span></li>
               </ul>
             </div>
           </section>
         </div>
+      </article>
+
+      <!-- ===== 05 A MODEL FOR GAMES (2) ===== -->
+      <article class="page" id="p-model-2">
+        <header class="pg-head">
+          <h2 class="pg-title pg-title-md" data-t="model2.title">HOW THE MODEL WOULD BE TRAINED</h2>
+          <p class="pg-sub" data-t="model2.sub">The plan in the grant application. Nothing has been run yet.</p>
+        </header>
+        <div class="two-col pl-cols">
+          <div class="txt txt-sm">
+            <p class="in" data-t="model2.p1">Training needs labelled examples, and accessibility experts cannot label tens of thousands of screenshots by hand. In this plan a large model drafts the labels, people check them, and the small models learn from the checked set.</p>
+            <p class="in" data-t="model2.p2">Two results on web pages suggest the approach is realistic. A vision-language agent found 86% of the barriers that experts had found, against 36% for the rule-based checker axe-core, although 44% of its flags were wrong (Mishra et al., 2026).</p>
+            <p class="in" data-t="model2.p3">Reinforcement learning raised a 4-billion-parameter model’s F1 score on interface violations from 36% to 84% (Mehta et al., 2026). F1 balances two things: how many real problems a model finds, and how many of its flags are correct.</p>
+            <p class="note frame in" data-t="model2.note">The first models look at still screenshots, so they cannot judge sound or timing. People playing the game still have to check those.</p>
+          </div>
+          <section class="win in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="model2.win">Training plan</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <ol class="plan plan-h" data-advance>
+                <li data-step="1" data-fn="tl"><span class="pl-n">1</span><p><b data-t="model2.s1k">Collect</b></p></li>
+                <li data-step="2" data-fn="tl"><span class="pl-n">2</span><p><b data-t="model2.s2k">Draft and check labels</b></p></li>
+                <li data-step="3" data-fn="tl"><span class="pl-n">3</span><p><b data-t="model2.s3k">Train</b></p></li>
+                <li data-step="4" data-fn="tl"><span class="pl-n">4</span><p><b data-t="model2.s4k">Test</b></p></li>
+              </ol>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="model2.cite">Mishra, A., Karthik, P., Bae, B., &amp; Yoon, D. (2026). <a href="https://arxiv.org/abs/2609.09379" target="_blank" rel="noopener">Agentic web accessibility auditing</a>. <i>arXiv:2609.09379</i>. Mehta, N., Alse, S., Kumawat, H., Yu, Y., &amp; Jayarao, P. (2026). <a href="https://arxiv.org/abs/2607.20690" target="_blank" rel="noopener">Learning to detect UI principle violations via reinforcement learning</a>. <i>arXiv:2607.20690</i>.</p>
       </article>
 
       <!-- ===== PART 2 ===== -->
@@ -403,7 +447,7 @@
         <div class="two-col cp-cols">
           <div class="txt">
             <p class="in" data-t="cipt.p1">Can I Play That? publishes accessibility reviews written largely by disabled players. I analysed 448 of them, published between 2019 and 2024 (Di Leo, 2025).</p>
-            <p class="in" data-t="cipt.p2">A language model extracted keywords from each review and labelled each one positive, negative or mixed. Text embeddings and clustering then grouped the keywords into six themes. Difficulty settings had the most keywords; visual accessibility had the widest gap between positive and negative ones.</p>
+            <p class="in" data-t="cipt.p2">GPT-4o extracted keywords from each review and labelled each one positive, negative or mixed. An embedding model and k-means clustering then grouped the keywords into six themes. Difficulty settings had the most keywords; visual accessibility had the widest gap between positive and negative ones.</p>
             <p class="note frame in" data-t="cipt.note">Each reviewer writes from their own needs. Someone who relies on subtitles may test every caption option and say nothing about motor access, so the corpus shows what mattered to the people who wrote it, which is not a complete inventory.</p>
           </div>
           <section class="win in" style="--acc:var(--blue)">
@@ -422,7 +466,7 @@
             </div>
           </section>
         </div>
-        <p class="cite in" data-t="cipt.cite">Di Leo, N. (2025). Theoretical framework for video game accessibility: Bridging user experiences and industry data for inclusive design. In <i>AAATE 2025</i> (pp. 304–314). Springer.</p>
+        <p class="cite in" data-t="cipt.cite">Di Leo, N. (2025). <a href="https://doi.org/10.1007/978-3-032-01628-7_37" target="_blank" rel="noopener">Theoretical framework for video game accessibility: Bridging user experiences and industry data for inclusive design</a>. In <i>AAATE 2025</i> (pp. 304–314). Springer.</p>
 
         <section class="win win-float win-fig jit" id="w-cl-0" style="--acc:var(--blue)" hidden>
           <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig0">Keyword clusters, t-SNE map</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
@@ -452,6 +496,34 @@
           <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title" data-t="cipt.fig6">Subtitles: keywords over time</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
           <div class="win-img"><img src="assets/img/aaate-subtitles.jpg" alt="Line chart, cumulative count of subtitles keywords from 2018 to 2024. Negative keywords stay ahead until early 2023, when positive ones overtake them; they end at about 300 positive and 275 negative; mixed keywords reach about 65." width="1400" height="686" loading="lazy"></div>
         </section>
+      </article>
+
+      <!-- ===== 07 HOW THE THEMES WERE FOUND ===== -->
+      <article class="page" id="p-cipt-2">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="cipt2.title">HOW THE THEMES WERE FOUND</h2>
+          <p class="pg-sub" data-t="cipt2.sub">The pipeline behind the six themes, step by step</p>
+        </header>
+        <div class="two-col pl-cols">
+          <div class="txt txt-sm">
+            <p class="in" data-t="cipt2.p1">The theme charts count keywords, not reviews. One review can give many keywords, and they can fall into several themes.</p>
+            <p class="in" data-t="cipt2.p2">The method has limits worth knowing. All the reviews are in English. GPT-4o is a closed model that OpenAI keeps updating, so the same run cannot be repeated exactly. And k-means needs the number of groups chosen in advance, so that choice shapes the themes.</p>
+            <p class="note frame in" data-t="cipt2.note">The themes show what reviewers write about. They do not show which guidelines a game meets: that needed the mapping on the next page.</p>
+          </div>
+          <section class="win in" style="--acc:var(--lilac)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="cipt2.win">Pipeline</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <ol class="plan" data-advance>
+                <li data-step="1" data-fn="tl"><span class="pl-n">1</span><p><b data-t="cipt2.s1k">Collect</b> <span data-t="cipt2.s1">A web scraper saved the full text of 448 accessibility reviews from Can I Play That?, published between 2019 and 2024.</span></p></li>
+                <li data-step="2" data-fn="tl"><span class="pl-n">2</span><p><b data-t="cipt2.s2k">Extract keywords</b> <span data-t="cipt2.s2">GPT-4o (OpenAI) listed each review’s accessibility keywords and labelled each one positive, negative or mixed. Of the models tested, it agreed most closely with a sample of reviews labelled by hand. Those same reviews then became the prompt’s few-shot examples: worked examples the model sees before the task.</span></p></li>
+                <li data-step="3" data-fn="tl"><span class="pl-n">3</span><p><b data-t="cipt2.s3k">Embed</b> <span data-t="cipt2.s3">OpenAI’s text-embedding-3-large turned each keyword into a vector: a list of numbers in which similar meanings sit close together.</span></p></li>
+                <li data-step="4" data-fn="tl"><span class="pl-n">4</span><p><b data-t="cipt2.s4k">Cluster</b> <span data-t="cipt2.s4">k-means sorted the vectors into groups of nearby points. I read each group to check and name it (the paper calls this qualitative supervision), which gave six themes.</span></p></li>
+                <li data-step="5" data-fn="tl"><span class="pl-n">5</span><p><b data-t="cipt2.s5k">Draw the map</b> <span data-t="cipt2.s5">t-SNE reduced the vectors to two dimensions for the cluster map. It only draws the picture; the groups come from step 4.</span></p></li>
+              </ol>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="cipt2.cite">Di Leo, N. (2025). <a href="https://doi.org/10.1007/978-3-032-01628-7_37" target="_blank" rel="noopener">Theoretical framework for video game accessibility</a>. In <i>AAATE 2025</i> (pp. 304–314). Springer.</p>
       </article>
 
       <!-- ===== 08 FROM CHECKLISTS TO PLAYABILITY (1) ===== -->
@@ -489,7 +561,7 @@
             </div>
           </section>
         </div>
-        <p class="cite in" data-t="check1.cite">Di Leo, N., &amp; Tarantino, A. (2026). From checklists to playability: A systematic mapping of player reviews to the Game Accessibility Guidelines. In <i>Proceedings of DiGRA 2026</i>. Digital Games Research Association.</p>
+        <p class="cite in" data-t="check1.cite">Di Leo, N., &amp; Tarantino, A. (2026). <a href="https://doi.org/10.26503/dl.v2026i3.2833" target="_blank" rel="noopener">From checklists to playability: A systematic mapping of player reviews to the Game Accessibility Guidelines</a>. In <i>Proceedings of DiGRA 2026</i>. Digital Games Research Association.</p>
         <section class="win win-float jit" id="w-digra" style="--acc:var(--blue)" hidden>
           <div class="win-bar"><button class="win-close" type="button" aria-label="Close window"></button><span class="win-title">DiGRA 2026</span><button class="win-zoom" type="button" aria-label="Enlarge"></button></div>
           <div class="win-img"><img src="assets/img/paper-digra.png" alt="First page of the paper From Checklists to Playability: A systematic mapping of player reviews to the Game Accessibility Guidelines, by Nadia Di Leo and Antonino Tarantino, University of Foggia." width="728" height="836"></div>
@@ -546,9 +618,9 @@
               <p class="lm-src" data-t="llm.src">Review passage, written for this slide from the South of Midnight audit notes</p>
               <p class="lm-text" id="lm-text" data-t="llm.passage"><span class="hl" data-h="1" data-t="llm.h1">Combat, boss fights and chase sequences can all be skipped</span> from the settings. <span class="hl" data-h="2" data-t="llm.h2">The screen reader covers menus</span> and collectible text. <span class="hl" data-h="3" data-t="llm.h3">A glowing strand shows the way to the next objective, and an audio beacon gets louder</span> as you get closer. Annoyingly, <span class="hl" data-h="4" data-t="llm.h4">my custom key bindings were gone every time I restarted</span>.</p>
               <ol class="lm-tags" id="lm-tags">
-                <li data-h="1"><span class="lm-g" data-t="llm.g1">Offer a means to bypass gameplay elements… General, Intermediate</span><span class="lm-v lm-yes">yes</span><span class="lm-c"><i style="--c:.94"></i>0.94</span></li>
-                <li data-h="2"><span class="lm-g" data-t="llm.g2">Ensure screen reader support, including menus… Vision, Advanced</span><span class="lm-v lm-yes">yes</span><span class="lm-c"><i style="--c:.88"></i>0.88</span></li>
-                <li data-h="3" class="lm-unsure"><span class="lm-g" data-t="llm.g3">Provide a voiced GPS? Vision, Advanced</span><span class="lm-v">unsure</span><span class="lm-c"><i style="--c:.41"></i>0.41</span></li>
+                <li data-h="1"><span class="lm-g" data-t="llm.g1">Offer a means to bypass gameplay elements… General, Intermediate</span><span class="lm-v lm-yes">yes</span><span class="lm-c"><i style="--c:1"></i>1.00</span></li>
+                <li data-h="2"><span class="lm-g" data-t="llm.g2">Ensure screen reader support, including menus… Vision, Advanced</span><span class="lm-v lm-yes">yes</span><span class="lm-c"><i style="--c:.9"></i>0.90</span></li>
+                <li data-h="3" class="lm-unsure"><span class="lm-g" data-t="llm.g3">Provide a voiced GPS? Vision, Advanced</span><span class="lm-v">unsure</span><span class="lm-c"><i style="--c:.4"></i>0.40</span></li>
                 <li data-h="4"><span class="lm-g" data-t="llm.g4">Ensure that all settings are saved/remembered. General, Basic</span><span class="lm-v lm-no">no</span><span class="lm-c"><i style="--c:.90"></i>0.90</span></li>
               </ol>
               <p class="lm-review" id="lm-review"><b data-t="llm.rk">Human review</b> <span data-t="llm.r">The Strand matches no single guideline. Record it as a design-level provision.</span></p>
@@ -559,7 +631,39 @@
             </div>
           </section>
         </div>
-        <p class="cite in" data-t="llm.cite">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). <i>PNAS, 120</i>(30). Pangakis, N., Wolken, S., &amp; Fasching, N. (2023). <i>arXiv:2306.00176</i>. Di Leo, N. (2026b). Manuscript submitted for publication.</p>
+        <p class="cite in" data-t="llm.cite">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). <a href="https://doi.org/10.1073/pnas.2305016120" target="_blank" rel="noopener">ChatGPT outperforms crowd workers for text-annotation tasks</a>. <i>PNAS, 120</i>(30). Pangakis, N., Wolken, S., &amp; Fasching, N. (2023). <a href="https://arxiv.org/abs/2306.00176" target="_blank" rel="noopener">Automated annotation with generative AI requires validation</a>. Di Leo, N. (2026b). Manuscript submitted for publication.</p>
+      </article>
+
+      <!-- ===== 09 TESTING THE FIRST PASS ===== -->
+      <article class="page" id="p-llm-2">
+        <header class="pg-head">
+          <h2 class="pg-title" data-t="llm2.title">TESTING THE FIRST PASS</h2>
+          <p class="pg-sub" data-t="llm2.sub">The planned experiment, before a model labels any new review</p>
+        </header>
+        <div class="two-col ex-cols">
+          <div class="txt txt-sm">
+            <p class="in" data-t="llm2.p1">Before a model labels new reviews, it should label the 479 I have already coded by hand, so that its answers can be compared with mine.</p>
+            <p class="in" data-t="llm2.p2">Plain accuracy would mislead. Most cells are empty, because each review mentions only a few of the 120 guidelines, so a model that always said “not mentioned” would score high and find nothing. Cohen’s κ corrects for this, and precision and recall check the yes and no labels on their own.</p>
+            <p class="in" data-t="llm2.p3">Models tend to overstate their confidence when asked for it (Xiong et al., 2024). Here it is measured instead: each review is labelled ten times, and confidence is the share of runs that agree.</p>
+            <p class="note frame in" data-t="llm2.note">The hand coding was done by one person. A second coder should first label a sample, so the model is compared with a measured level of human agreement.</p>
+          </div>
+          <section class="win in" style="--acc:var(--blue)">
+            <div class="win-bar"><i class="win-close"></i><span class="win-title" data-t="llm2.win">Experiment setup (planned)</span><i class="win-zoom"></i></div>
+            <div class="win-body">
+              <dl class="rec spec">
+                <dt>task</dt><dd data-t="llm2.a1">For every review and each of the 120 guidelines: yes, no or not mentioned, the same codes used by hand</dd>
+                <dt>input</dt><dd data-t="llm2.a2">The full review, the guideline’s wording and the written coding rules from the DiGRA paper</dd>
+                <dt>output</dt><dd data-t="llm2.a3">A label and the exact words that support it. Quotes that do not appear in the review are rejected automatically</dd>
+                <dt>runs</dt><dd data-t="llm2.a4">Ten per review; confidence is the share of runs that agree</dd>
+                <dt>test set</dt><dd data-t="llm2.a5">479 hand-coded reviews × 120 guidelines = 57,480 decisions</dd>
+                <dt>measures</dt><dd data-t="llm2.a6">Cohen’s κ against the hand coding. For yes and for no: precision, the share of the model’s labels that are right, and recall, the share of the real ones it finds</dd>
+                <dt>human check</dt><dd data-t="llm2.a7">Every label where fewer than 8 of 10 runs agree, plus a random sample of the rest</dd>
+                <dt>models</dt><dd data-t="llm2.a8">Not chosen yet: open-weight models that run locally, compared with GPT-4o</dd>
+              </dl>
+            </div>
+          </section>
+        </div>
+        <p class="cite in" data-t="llm2.cite">Xiong, M., Hu, Z., Lu, X., Li, Y., Fu, J., He, J., &amp; Hooi, B. (2024). <a href="https://arxiv.org/abs/2306.13063" target="_blank" rel="noopener">Can LLMs express their uncertainty?</a> <i>ICLR 2024</i>. Di Leo, N., &amp; Tarantino, A. (2026). <a href="https://doi.org/10.26503/dl.v2026i3.2833" target="_blank" rel="noopener">From checklists to playability</a>. <i>DiGRA 2026</i>.</p>
       </article>
 
       <!-- ===== 10 ONE RECORD FOR BOTH WORKFLOWS ===== -->
@@ -608,11 +712,11 @@
         <header class="pg-head"><h2 class="pg-title" data-t="limits.title">WHERE IT CAN GO WRONG</h2></header>
         <div class="two-col li-cols">
           <div class="txt">
-            <ul class="dash">
-              <li class="in" data-t="limits.l1">A model can miss barriers that appear after the first hour, or only under time pressure.</li>
-              <li class="in" data-t="limits.l2">It can misread game state: in a single frame, a paused menu, a cutscene and live play can look alike.</li>
-              <li class="in" data-t="limits.l3">It can take a settings toggle for a feature that works.</li>
-              <li class="in" data-t="limits.l4">The sources have gaps. Speech guidelines are mentioned in 1.3% of the cases where they could be, so some disabilities and player groups are barely represented.</li>
+            <ul class="dash risks">
+              <li class="in"><span data-t="limits.l1">A model can miss barriers that appear after the first hour, or only under time pressure.</span><span class="fix"><b>Precaution</b> <span data-t="limits.f1">Start some test runs from saves later in the game, and state in every report how much of the game was covered.</span></span></li>
+              <li class="in"><span data-t="limits.l2">It can misread game state: in a single frame, a paused menu, a cutscene and live play can look alike.</span><span class="fix"><b>Precaution</b> <span data-t="limits.f2">Give it a few seconds of video instead of one frame, and have it say which state it thinks it is looking at.</span></span></li>
+              <li class="in"><span data-t="limits.l3">It can take a settings toggle for a feature that works.</span><span class="fix"><b>Precaution</b> <span data-t="limits.f3">Count a feature as working only after it has been used in play and has survived a restart.</span></span></li>
+              <li class="in"><span data-t="limits.l4">The sources have gaps. Speech guidelines are mentioned in 1.3% of the cases where they could be, so some disabilities and player groups are barely represented.</span><span class="fix"><b>Precaution</b> <span data-t="limits.f4">Show how often each category is mentioned next to every result, and recruit testers from the groups the sources leave out.</span></span></li>
             </ul>
             <p class="note frame in" data-t="limits.note">Any system needs traceable evidence and version history, then expert review and testing with disabled players.</p>
           </div>
@@ -683,19 +787,22 @@
       <article class="page" id="p-refs">
         <header class="pg-head"><h2 class="pg-title">REFERENCES</h2></header>
         <div class="refs in">
-          <p data-t="refs.r1">Ai2. (2026, May 21). <i>Building accessibility tools on a truly open foundation</i>. https://allenai.org/blog/global-accessibility-awareness-day-2026</p>
-          <p data-t="refs.r2">Barnett, L., Harvey, C., &amp; Gatzidis, C. (2018). First time user experiences in mobile games: An evaluation of usability. <i>Entertainment Computing, 27</i>, 82–88.</p>
-          <p data-t="refs.r3">Di Leo, N. (2025). Theoretical framework for video game accessibility: Bridging user experiences and industry data for inclusive design. In <i>Technology for Inclusion and Participation for All: Recent Achievements and Future Directions (AAATE 2025)</i> (pp. 304–314). Springer. https://doi.org/10.1007/978-3-032-01628-7_37</p>
+          <p data-t="refs.r1">Ai2. (2026, May 21). <i>Building accessibility tools on a truly open foundation</i>. <a href="https://allenai.org/blog/global-accessibility-awareness-day-2026" target="_blank" rel="noopener">https://allenai.org/blog/global-accessibility-awareness-day-2026</a></p>
+          <p data-t="refs.r2">Barnett, L., Harvey, C., &amp; Gatzidis, C. (2018). First time user experiences in mobile games: An evaluation of usability. <i>Entertainment Computing, 27</i>, 82–88. <a href="https://doi.org/10.1016/j.entcom.2018.04.004" target="_blank" rel="noopener">https://doi.org/10.1016/j.entcom.2018.04.004</a></p>
+          <p data-t="refs.r3">Di Leo, N. (2025). Theoretical framework for video game accessibility: Bridging user experiences and industry data for inclusive design. In <i>Technology for Inclusion and Participation for All: Recent Achievements and Future Directions (AAATE 2025)</i> (pp. 304–314). Springer. <a href="https://doi.org/10.1007/978-3-032-01628-7_37" target="_blank" rel="noopener">https://doi.org/10.1007/978-3-032-01628-7_37</a></p>
           <p data-t="refs.r4">Di Leo, N. (2026a). <i>A matter of accessibility: A guidelines-based accessibility evaluation of award-nominated video games</i> (manuscript under review).</p>
           <p data-t="refs.r5">Di Leo, N. (2026b). <i>The reception of Minecraft Education Edition in user reviews: An LLM-assisted thematic analysis</i> (manuscript submitted for publication).</p>
-          <p data-t="refs.r6">Di Leo, N., &amp; Tarantino, A. (2026). From checklists to playability: A systematic mapping of player reviews to the Game Accessibility Guidelines. In <i>Proceedings of DiGRA 2026</i>. https://doi.org/10.26503/dl.v2026i3.2833</p>
-          <p data-t="refs.r7">Game Accessibility Guidelines. (n.d.). <i>Game accessibility guidelines: A straightforward reference for inclusive game design</i>. https://gameaccessibilityguidelines.com</p>
-          <p data-t="refs.r8">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. <i>PNAS, 120</i>(30), e2305016120.</p>
-          <p data-t="refs.r9">Pangakis, N., Wolken, S., &amp; Fasching, N. (2023). <i>Automated annotation with generative AI requires validation</i>. arXiv:2306.00176.</p>
-          <p data-t="refs.r10">Rongen, M. (2026, May 22). Assassin’s Creed Shadows wins Canadian Game Award for accessibility. <i>Can I Play That?</i></p>
-          <p data-t="refs.r11">Squires-Hand, L. (2025, December 12). Over 19,000 games have released on Steam in 2025, with nearly half seeing fewer than 10 reviews. <i>GamingOnLinux</i>.</p>
-          <p data-t="refs.r12">Taesiri, M. R., Feng, T., Bezemer, C.-P., &amp; Nguyen, A. (2024). GlitchBench: Can large multimodal models detect video game glitches? In <i>CVPR 2024</i> (pp. 22444–22455).</p>
-          <p data-t="refs.r13">Works, B. (2026). <i>PointCheck</i> [Computer software]. GitHub. https://github.com/BrendanWorks/PointCheck</p>
+          <p data-t="refs.r6">Di Leo, N., &amp; Tarantino, A. (2026). From checklists to playability: A systematic mapping of player reviews to the Game Accessibility Guidelines. In <i>Proceedings of DiGRA 2026</i>. <a href="https://doi.org/10.26503/dl.v2026i3.2833" target="_blank" rel="noopener">https://doi.org/10.26503/dl.v2026i3.2833</a></p>
+          <p data-t="refs.r7">Game Accessibility Guidelines. (n.d.). <i>Game accessibility guidelines: A straightforward reference for inclusive game design</i>. <a href="https://gameaccessibilityguidelines.com" target="_blank" rel="noopener">https://gameaccessibilityguidelines.com</a></p>
+          <p data-t="refs.r8">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. <i>PNAS, 120</i>(30), e2305016120. <a href="https://doi.org/10.1073/pnas.2305016120" target="_blank" rel="noopener">https://doi.org/10.1073/pnas.2305016120</a></p>
+          <p data-t="refs.r9">Mehta, N., Alse, S., Kumawat, H., Yu, Y., &amp; Jayarao, P. (2026). <i>Learning to detect UI principle violations via reinforcement learning</i>. arXiv:2607.20690. <a href="https://arxiv.org/abs/2607.20690" target="_blank" rel="noopener">https://arxiv.org/abs/2607.20690</a></p>
+          <p data-t="refs.r10">Mishra, A., Karthik, P., Bae, B., &amp; Yoon, D. (2026). <i>Agentic web accessibility auditing: A criterion-specific framework for translating WCAG requirements into assessments</i>. arXiv:2609.09379. <a href="https://arxiv.org/abs/2609.09379" target="_blank" rel="noopener">https://arxiv.org/abs/2609.09379</a></p>
+          <p data-t="refs.r11">Pangakis, N., Wolken, S., &amp; Fasching, N. (2023). <i>Automated annotation with generative AI requires validation</i>. arXiv:2306.00176. <a href="https://arxiv.org/abs/2306.00176" target="_blank" rel="noopener">https://arxiv.org/abs/2306.00176</a></p>
+          <p data-t="refs.r12">Rongen, M. (2026, May 22). Assassin’s Creed Shadows wins Canadian Game Award for accessibility. <i>Can I Play That?</i> <a href="https://caniplaythat.com/2026/05/22/assassins-creed-shadows-wins-canadian-game-award-for-accessibility/" target="_blank" rel="noopener">https://caniplaythat.com/2026/05/22/assassins-creed-shadows-wins-canadian-game-award-for-accessibility/</a></p>
+          <p data-t="refs.r13">Squires-Hand, L. (2025, December 12). Over 19,000 games have released on Steam in 2025, with nearly half seeing fewer than 10 reviews. <i>GamingOnLinux</i>. <a href="https://www.gamingonlinux.com/2025/12/over-19000-games-have-released-on-steam-in-2025-with-nearly-half-seeing-fewer-than-10-reviews" target="_blank" rel="noopener">https://www.gamingonlinux.com/2025/12/over-19000-games-have-released-on-steam-in-2025-with-nearly-half-seeing-fewer-than-10-reviews</a></p>
+          <p data-t="refs.r14">Taesiri, M. R., Feng, T., Bezemer, C.-P., &amp; Nguyen, A. (2024). GlitchBench: Can large multimodal models detect video game glitches? In <i>CVPR 2024</i> (pp. 22444–22455). <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Taesiri_GlitchBench_Can_Large_Multimodal_Models_Detect_Video_Game_Glitches_CVPR_2024_paper.html" target="_blank" rel="noopener">https://openaccess.thecvf.com/content/CVPR2024/html/Taesiri_GlitchBench_Can_Large_Multimodal_Models_Detect_Video_Game_Glitches_CVPR_2024_paper.html</a></p>
+          <p data-t="refs.r15">Works, B. (2026). <i>PointCheck</i> [Computer software]. GitHub. <a href="https://github.com/BrendanWorks/PointCheck" target="_blank" rel="noopener">https://github.com/BrendanWorks/PointCheck</a></p>
+          <p data-t="refs.r16">Xiong, M., Hu, Z., Lu, X., Li, Y., Fu, J., He, J., &amp; Hooi, B. (2024). Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. In <i>ICLR 2024</i>. <a href="https://arxiv.org/abs/2306.13063" target="_blank" rel="noopener">https://arxiv.org/abs/2306.13063</a></p>
         </div>
       </article>
 

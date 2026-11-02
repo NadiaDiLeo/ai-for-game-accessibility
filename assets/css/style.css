@@ -450,32 +450,26 @@ a:hover { background: #fff; outline: 2px dotted var(--blue-d); outline-offset: 1
 .heat-key i { width: 26px; height: 16px; border: 2px solid var(--ink); }
 .heat-key .hk-na { margin-left: 18px; }
 
-/* 01 present, documented, usable */
-.intro-cols { grid-template-columns: 1fr 640px; gap: 60px; }
-.intro-cols .txt p { font-size: 28px; }
-.intro-cols .note { font-size: 26px !important; }
-.ranges { position: relative; padding: 4px 0 0; }
-.rg-row { margin-bottom: 34px; }
-.rg-l { font-size: 24px; line-height: 1.1; margin-bottom: 30px; }
-.rg-l span { color: var(--ink-2); font-size: 19px; margin-left: 6px; }
-.rg-track { position: relative; height: 50px; border: 2px solid var(--ink); background: var(--paper);
-  background-image: linear-gradient(90deg, transparent calc(25% - 1px), var(--grey-l) calc(25% - 1px) 25%, transparent 25% calc(50% - 1px), var(--grey-l) calc(50% - 1px) 50%, transparent 50% calc(75% - 1px), var(--grey-l) calc(75% - 1px) 75%, transparent 75%); }
-.rg-band { position: absolute; top: 6px; bottom: 6px; width: 0; transition: width .8s cubic-bezier(.2, .8, .2, 1); }
-.rg-row[data-k="impl"] .rg-band { background: var(--lilac); }
-.rg-row[data-k="doc"] .rg-band { background-color: var(--blue); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Crect width='2' height='2' fill='%234f6a78'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%234f6a78'/%3E%3C/svg%3E"); }
-.rg-dot { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 2px solid var(--ink); background: var(--paper); transition: opacity .2s, transform .2s steps(2); }
-.rg-row[data-k="impl"] .rg-dot { background: var(--lilac-d); }
-.rg-row[data-k="doc"] .rg-dot { background: var(--blue-d); }
-.rg-val { position: absolute; top: -25px; font-size: 18px; line-height: 1; transform: translateX(-50%); white-space: nowrap; }
-.rg-tip { position: absolute; top: 54px; font-size: 18px; line-height: 1; padding: 4px 7px 2px; background: var(--ink); color: var(--paper); transform: translateX(-50%); white-space: nowrap; pointer-events: none; }
-.rg-none { border-style: dashed; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--ink-2); background-image: none; }
-.rg-axis { display: flex; justify-content: space-between; font-size: 16px; color: var(--ink-3); margin: -12px -6px 0; }
-.ranges.pick .rg-dot:not(.on) { opacity: .2; }
-.ranges.pick .rg-dot.on { transform: scale(1.3); z-index: 2; }
-.rg-games { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding-top: 16px; border-top: 2px dotted var(--lilac-d); }
-.rg-games button { font-size: 18px; line-height: 1; padding: 6px 9px 3px; border: 2px solid var(--ink); background: var(--paper); }
-.rg-games button:hover { background: var(--lilac-l); }
-.rg-games button.on { background: var(--ink); color: var(--paper); }
+/* 01 what this talk asks: the question, the route, the slides QR */
+.rd-cols { grid-template-columns: 1fr 660px; gap: 64px; }
+.rd-cols .txt p { font-size: 27px; }
+.rd-cols .txt p.rd-q { font-size: 35px; line-height: 1.2; text-shadow: var(--bold); margin-bottom: 24px; }
+.rd-qr { display: flex; align-items: center; gap: 22px; margin-top: 34px; padding: 14px 20px 14px 14px; width: max-content; max-width: 100%; }
+.qr.qr-sm { flex: 0 0 auto; width: 176px; height: 176px; padding: 10px; }
+.rd-qr p { font-size: 20px; line-height: 1.3; }
+.rd-qr-k { display: block; margin-bottom: 8px; font-size: 24px; line-height: 1.15; color: var(--ink); }
+.rt { list-style: none; cursor: pointer; }
+.rt li { visibility: hidden; padding: 16px 0; border-top: 2px dotted var(--lilac-d); }
+.rt li:first-child { border-top: 0; padding-top: 2px; }
+.rt li:last-child { padding-bottom: 4px; }
+.rt li.is-done { visibility: visible; }
+.rt-h { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; font-size: 32px; line-height: 1; }
+.rt-h b { flex: 0 0 auto; padding: 5px 8px 2px; font-size: 17px; letter-spacing: .06em; text-shadow: none; background: var(--ink); color: var(--paper); }
+.rt-r { display: grid; grid-template-columns: 76px 1fr; gap: 10px; margin-top: 6px; font-size: 21px; line-height: 1.25; }
+.rt-r em { padding-top: 3px; font-style: normal; font-size: 16px; text-transform: uppercase; letter-spacing: .05em; color: var(--lilac-d); }
+.rt-r.rt-one { grid-template-columns: 1fr; }
+
+/* the Game Accessibility Guidelines window (opened from the audit page) */
 #w-gagfull { left: 690px; top: 120px; width: 700px; }
 #w-gagfull .win-scroll { height: 560px; }
 #w-gagfull.max { left: 60px !important; top: 40px !important; width: 1480px; }
@@ -637,6 +631,26 @@ a:hover { background: #fff; outline: 2px dotted var(--blue-d); outline-offset: 1
 .qst li.now .qbox { border-color: var(--paper); background: transparent; animation: blink 1.2s steps(1) infinite; }
 .qst li.now em { margin-left: auto; font-style: normal; font-size: 17px; color: var(--lilac); white-space: nowrap; }
 
+/* 05 and 07: numbered plans and pipelines, one step per arrow press */
+.pl-cols { grid-template-columns: 1fr 700px; gap: 56px; }
+.pl-cols .txt p { margin-bottom: 14px; }
+.plan { list-style: none; cursor: pointer; }
+.plan li { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 12px 0 10px; border-top: 2px dotted var(--lilac-d); visibility: hidden; }
+.plan li:first-child { border-top: 0; padding-top: 0; }
+.plan li.is-done { visibility: visible; }
+.pl-n { width: 30px; height: 30px; display: grid; place-content: center; font-size: 18px; line-height: 1; background: var(--blue-d); color: #fff; }
+.plan p { font-size: 20px; line-height: 1.28; }
+.plan b { display: block; margin-bottom: 3px; font-size: 22px; line-height: 1.1; }
+#p-cipt-2 .plan li { padding: 9px 0 7px; }
+#p-cipt-2 .plan li:first-child { padding-top: 0; }
+#p-cipt-2 .plan p { line-height: 1.24; }
+.plan-h li { grid-template-columns: 40px 1fr; align-items: center; gap: 18px; padding: 20px 0 17px; }
+.plan-h li:first-child { padding-top: 4px; }
+.plan-h .pl-n { width: 40px; height: 40px; font-size: 22px; }
+.plan-h b { margin: 0; font-size: 32px; }
+.pl-foot { margin-top: 12px; padding-top: 10px; border-top: 2px solid var(--ink); font-size: 18px; line-height: 1.25; color: var(--ink-2); }
+#p-model-2 .cite, #p-cipt-2 .cite, #p-llm-2 .cite { right: 820px; }
+
 /* 06 more material to map: timeline */
 .at-cols { grid-template-columns: 1fr 640px; gap: 60px; }
 .tl { list-style: none; position: relative; padding-left: 4px; }
@@ -727,6 +741,14 @@ a:hover { background: #fff; outline: 2px dotted var(--blue-d); outline-offset: 1
 .lm-actions { display: flex; gap: 12px; margin-top: 12px; }
 .lm-actions .btn.is-done { opacity: .35; }
 
+/* 09 testing the first pass: the planned setup */
+.ex-cols { grid-template-columns: 1fr 700px; gap: 56px; }
+.ex-cols .txt p { margin-bottom: 12px; }
+.rec.spec { grid-template-columns: 132px 1fr; }
+.rec.spec dt { padding-top: 10px; font-size: 16px; }
+.rec.spec dd { min-height: 0; padding: 7px 0 5px; font-size: 19px; }
+.rec.spec dt:first-of-type, .rec.spec dd:first-of-type { border-top: 0; padding-top: 0; }
+
 /* 10 one record */
 .rc-cols { grid-template-columns: 1fr 680px; gap: 60px; }
 .rec { display: grid; grid-template-columns: 116px 1fr; column-gap: 14px; }
@@ -745,6 +767,10 @@ a:hover { background: #fff; outline: 2px dotted var(--blue-d); outline-offset: 1
 .li-cols { grid-template-columns: 1fr 680px; gap: 60px; }
 .li-cols .dash li { font-size: 25px; margin-bottom: 16px; line-height: 1.3; }
 .li-cols .note { margin-top: 26px; font-size: 24px; }
+.li-cols .dash.risks li { font-size: 23px; line-height: 1.26; margin-bottom: 14px; }
+.risks .fix { display: block; margin-top: 4px; font-size: 19px; line-height: 1.26; color: var(--ink-2); }
+.risks .fix b { margin-right: 4px; font-size: 15px; text-transform: uppercase; letter-spacing: .05em; color: var(--lilac-d); text-shadow: none; }
+.li-cols .risks + .note { margin-top: 18px; font-size: 21px; padding: 12px 18px; }
 .pairs { display: flex; flex-direction: column; gap: 14px; }
 .q-head { font-size: 34px; line-height: 1; margin-bottom: 4px; }
 .pair-m { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 330px; padding: 8px 12px 6px; font-size: 22px; line-height: 1; background: var(--ink); color: var(--paper); }
@@ -827,7 +853,7 @@ html.fluid .pg-sub { font-size: 23px; }
 html.fluid .two-col, html.fluid .claims, html.fluid .end-wrap, html.fluid .pc-demo {
   grid-template-columns: minmax(0, 1fr) !important; gap: 26px; padding-top: 0;
 }
-html.fluid .txt p, html.fluid .dash li, html.fluid .note, html.fluid .intro-cols .txt p, html.fluid .aw1-cols .txt p, html.fluid .aw3-cols .txt p, html.fluid .li-cols .dash li { font-size: 22px !important; }
+html.fluid .txt p, html.fluid .dash li, html.fluid .note, html.fluid .aw1-cols .txt p, html.fluid .aw3-cols .txt p, html.fluid .li-cols .dash li { font-size: 22px !important; }
 html.fluid .lead, html.fluid .lead-wide { font-size: 24px; margin-top: 0; }
 html.fluid .cite { position: static; margin-top: 26px; font-size: 16px; }
 html.fluid .win-title { font-size: 21px; }
@@ -840,6 +866,11 @@ html.fluid .div-q { font-size: 24px; margin-bottom: 30px; }
 html.fluid .div-panel { max-width: 520px; }
 html.fluid .win-float { position: fixed; left: 10px !important; right: 10px; top: 64px !important; width: auto !important; max-height: calc(100vh - 150px); overflow-y: auto; z-index: 120; }
 html.fluid #w-gagfull .win-scroll { height: 60vh; }
+html.fluid .txt p.rd-q { font-size: 26px !important; }
+html.fluid .rd-qr { flex-wrap: wrap; width: auto; }
+html.fluid .qr.qr-sm { width: 150px; height: 150px; }
+html.fluid .rt-h { font-size: 26px; }
+html.fluid .rt-r { grid-template-columns: 58px 1fr; font-size: 19px; }
 html.fluid .bars { margin-left: 26px; height: 220px; }
 html.fluid .bars .grid { left: -26px; }
 html.fluid .bar { width: 15px; }
@@ -864,6 +895,13 @@ html.fluid .lm-tags li { grid-template-columns: 1fr 60px; }
 html.fluid .lm-c { grid-column: 1 / -1; }
 html.fluid .rec { grid-template-columns: 90px 1fr; }
 html.fluid .pair-m { width: auto; }
+html.fluid .li-cols .dash.risks li { font-size: 21px !important; }
+html.fluid .risks .fix { font-size: 18px; }
+html.fluid .plan p { font-size: 18px; }
+html.fluid .plan b { font-size: 20px; }
+html.fluid .plan-h b { font-size: 24px; }
+html.fluid .rec.spec { grid-template-columns: 96px 1fr; }
+html.fluid .rec.spec dd { font-size: 17px; }
 html.fluid .wall-hint { position: static; margin-top: 16px; }
 html.fluid .dialog { font-size: 21px; }
 html.fluid .claim { font-size: 21px; }
