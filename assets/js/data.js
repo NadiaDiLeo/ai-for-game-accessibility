@@ -102,20 +102,20 @@ WG.spines = {
    documented in official materials (Table 1). heat: % implemented by category (rows) and level (columns:
    basic, intermediate, advanced), read from the paper's Figures 1–5; null = no applicable guidelines. */
 WG.awards = [
-  { "id": "ac", "name": "Assassin’s Creed Shadows", "short": "AC Shadows", "impl": 77.0, "doc": 26.5, "app": 102,
-    "heat": [[100, 82, 50], [71, 67, 70], [100, 91, 75], [100, 88, 33], [100, null, null], [50, 86, 0]],
-    "note": "Strongest on vision and motor. Cognitive support is the weakest area: the settings menu is labelled “Animus”, and there is no central accessibility menu." },
+  { "id": "ac", "name": "Assassin’s Creed Shadows", "short": "AC Shadows", "impl": 77.7, "doc": 26.7, "app": 101,
+    "heat": [[100, 82, 50], [71, 67, 70], [100, 91, 75], [100, 88, 50], [100, null, null], [50, 86, 0]],
+    "note": "Strongest on vision and motor. The general category is the weakest, with no central accessibility menu. Cognitive support comes next: the settings menu is labelled “Animus”." },
   { "id": "atom", "name": "Atomfall", "short": "Atomfall", "impl": 83.0, "doc": 31.0, "app": 100,
     "heat": [[100, 86, 100], [100, 80, 50], [80, 100, 40], [100, 88, 50], [100, null, null], [100, 100, 50]],
     "note": "All basic and advanced motor guidelines are met. Instead of one gore toggle, Phobia Safe Modes cover seven specific triggers, from mice to crabs." },
-  { "id": "doom", "name": "DOOM: The Dark Ages", "short": "DOOM", "impl": 79.7, "doc": 40.6, "app": 101, "tag": "Award winner",
-    "heat": [[100, 82, 33], [100, 90, 40], [100, 100, 40], [100, 75, 0], [100, null, null], [100, 83, 0]],
+  { "id": "doom", "name": "DOOM: The Dark Ages", "short": "DOOM", "impl": 80.7, "doc": 40.6, "app": 101, "tag": "Award winner",
+    "heat": [[100, 82, 33], [100, 97, 40], [100, 100, 40], [100, 75, 0], [100, null, null], [100, 83, 0]],
     "note": "Meets every basic guideline. Removing the double jump and the dash lowered the physical demands of combat for every player. There is little for blind players, and no way to reduce gore." },
   { "id": "fc", "name": "EA Sports FC 26", "short": "FC 26", "impl": 74.5, "doc": 48.6, "app": 108,
     "heat": [[100, 68, 67], [86, 92, 60], [100, 91, 33], [100, 64, 0], [100, 50, 0], [100, 86, 100]],
     "note": "Lowest implementation and highest documentation. The Two Button control scheme, its most accessible option, is switched off in competitive modes." },
-  { "id": "som", "name": "South of Midnight", "short": "South of Midnight", "impl": 83.2, "doc": 25.5, "app": 98, "tag": "First in the audit",
-    "heat": [[90, 73, 100], [100, 77, 80], [100, 86, 75], [100, 94, 50], [100, null, null], [67, 83, 0]],
+  { "id": "som", "name": "South of Midnight", "short": "South of Midnight", "impl": 84.2, "doc": 25.5, "app": 98, "tag": "First in the audit",
+    "heat": [[90, 73, 100], [100, 77, 80], [100, 86, 75], [100, 94, 50], [100, null, null], [100, 83, 0]],
     "note": "Highest implementation and lowest documentation. The Guiding Strand traces the path to the next objective, with an audio beacon. Custom key bindings did not survive a restart." }
 ];
 WG.heatRows = ['Motor', 'Cognitive', 'Vision', 'Hearing', 'Speech', 'General'];
